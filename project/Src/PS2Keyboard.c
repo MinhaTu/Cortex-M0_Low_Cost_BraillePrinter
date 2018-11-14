@@ -7,16 +7,20 @@
 
 
 #include "PS2Keyboard.h"
-#include "stm32f0xx_hal.h"
 #define BUFFER_SIZE 45
 static volatile uint8_t buffer[BUFFER_SIZE];
 static volatile uint8_t head, tail;
 static uint16_t DataPin;
-GPIO_Typedef* DataPort;
+GPIO_TypeDef* DataPort;
 static uint8_t CharBuffer=0;
 static uint8_t UTF8next=0;
 const PS2Keymap_t *keymap= 0;
 
+
+void teste(void){
+	CharBuffer = 65;
+	return CharBuffer;
+}
 // The ISR for the external interrupt
 void ps2interrupt(void)
 {
@@ -27,7 +31,7 @@ void ps2interrupt(void)
 	uint8_t n, val;
 
 	//val = HAL_GPIO_WritePin(DataPort, DataPin); //MUDAR
-	now_ms = millis(); //MUDAR
+	now_ms = 5 ;//MUDAR
 	if (now_ms - prev_ms > 250) {
 		bitcount = 0;
 		incoming = 0;
