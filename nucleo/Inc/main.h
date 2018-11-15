@@ -44,7 +44,8 @@
 /* Includes ------------------------------------------------------------------*/
 
 /* USER CODE BEGIN Includes */
-
+void print(const char *format,  ...);
+void interrupcao();
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
@@ -54,7 +55,7 @@
 #define IQR_PIN_EXTI_IRQn EXTI0_IRQn
 #define DATA_PIN_Pin GPIO_PIN_1
 #define DATA_PIN_GPIO_Port GPIOA
-void interrupcao();
+
 /* ########################## Assert Selection ############################## */
 /**
   * @brief Uncomment the line below to expanse the "assert_param" macro in the 

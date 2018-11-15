@@ -39,10 +39,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f3xx_hal.h"
-
+#include <stdio.h>
 /* USER CODE BEGIN Includes */
 #include "PS2Keyboard.h"
-
+#include <stdarg.h>
 #define data_port 	GPIOA
 #define data_pin  	GPIO_PIN_1
 
@@ -51,16 +51,29 @@
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+char buffer[100];
+void print(const char *format,  ...){
 
+	va_list args;
+	va_start(args, format);
+	vsprintf(buffer, format, args);
+	va_end(args);
+
+	HAL_UART_Transmit(&huart2, buffer, 100, 1000);
+	memset(buffer,0,strlen(buffer));
+
+}
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -70,11 +83,12 @@ static void MX_GPIO_Init(void);
 /* USER CODE BEGIN 0 */
 Keyboard_TypeDef keyboard;
 Keyboard_TypeDef* pKeyboard = &keyboard;
-uint16_t x = GPIO_PIN_5;
 	void interrupcao(){
 		ps2interrupt(pKeyboard);
-		x = pKeyboard->DataPin;
 	}
+
+
+
 /* USER CODE END 0 */
 
 /**
@@ -85,6 +99,8 @@ uint16_t x = GPIO_PIN_5;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	char a = 97;
+	char b = 65;
 
   /* USER CODE END 1 */
 
@@ -106,17 +122,21 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_GetTick();
   keyboardBegin(pKeyboard, data_port, data_pin, iqr_port, iqr_pin);
+  print("teste\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {   HAL_GPIO_TogglePin(GPIOA, x);
-	  HAL_Delay(400);
+  {
+	  char c = keyboardRead(pKeyboard);
+	  print("Resultado = %d\r\n", c);
+//	  print("Main funcionando\r\n", a, b);
+	  HAL_Delay(1000);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -135,6 +155,7 @@ void SystemClock_Config(void)
 
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_PeriphCLKInitTypeDef PeriphClkInit;
 
     /**Initializes the CPU, AHB and APB busses clocks 
     */
@@ -161,6 +182,13 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+  PeriphClkInit.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
     /**Configure the Systick interrupt time 
     */
   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
@@ -171,6 +199,27 @@ void SystemClock_Config(void)
 
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+}
+
+/* USART2 init function */
+static void MX_USART2_UART_Init(void)
+{
+
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 38400;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
 }
 
 /** Configure pins as 

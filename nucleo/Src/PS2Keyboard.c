@@ -7,6 +7,7 @@
 
 
 #include "PS2Keyboard.h"
+#include "main.h"
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 /* MUDEI
  * #define BUFFER_SIZE 45
@@ -23,6 +24,7 @@ const PS2Keymap_t *keymap= 0;
 //	keyboard->DataPin = GPIO_PIN_5;
 //}
 
+
 // The ISR for the external interrupt
 void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 {
@@ -31,17 +33,9 @@ void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 	static uint32_t prev_ms=0;
 	uint32_t now_ms;
 	uint8_t n, val;
-	if(bitcount == 0){
-		keyboard->DataPin = GPIO_PIN_6;
-	}else if (bitcount == 1){
-		keyboard->DataPin = GPIO_PIN_5;
-	}else if (bitcount == 2){
-		keyboard->DataPin = GPIO_PIN_6;
-	}
-	bitcount++;
 	val = HAL_GPIO_ReadPin(keyboard->DataPort, keyboard->DataPin); //MUDAR
 	now_ms = HAL_GetTick() ;//MUDAR millis N SEI SE FUNCIONA POSSIVEL ERRO
-	if (now_ms - prev_ms > 250) {
+	if (now_ms - prev_ms > 450) {
 		bitcount = 0;
 		incoming = 0;
 	}
@@ -61,6 +55,7 @@ void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 		bitcount = 0;
 		incoming = 0;
 	}
+
 }
 
 static inline uint8_t get_scan_code(Keyboard_TypeDef* keyboard)
@@ -243,7 +238,7 @@ int keyboardReadUnicode(Keyboard_TypeDef* keyboard) { // MUDEI
 
 
 /*
- * É NECESSÁRIO CONFIGURAR OS PINOS DE DADOS E INTERRUPÇÃO MANUALMENTE
+ * Ã‰ NECESSÃ�RIO CONFIGURAR OS PINOS DE DADOS E INTERRUPÃ‡ÃƒO MANUALMENTE
  */
 void keyboardBegin(Keyboard_TypeDef* keyboard, GPIO_TypeDef* data_port, uint8_t data_pin, GPIO_TypeDef* iqr_port, uint8_t iqr_pin) {
   //uint8_t irq_num=255;
