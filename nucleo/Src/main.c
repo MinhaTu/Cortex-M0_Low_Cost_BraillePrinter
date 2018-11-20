@@ -39,10 +39,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f3xx_hal.h"
-#include <stdio.h>
+
 /* USER CODE BEGIN Includes */
 #include "PS2Keyboard.h"
-#include <stdarg.h>
+
 #define data_port 	GPIOA
 #define data_pin  	GPIO_PIN_1
 
@@ -55,18 +55,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-char buffer[100];
-void print(const char *format,  ...){
 
-	va_list args;
-	va_start(args, format);
-	vsprintf(buffer, format, args);
-	va_end(args);
-
-	HAL_UART_Transmit(&huart2, buffer, 100, 1000);
-	memset(buffer,0,strlen(buffer));
-
-}
 
 /* USER CODE END PV */
 
@@ -82,13 +71,10 @@ static void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN 0 */
 Keyboard_TypeDef keyboard;
-Keyboard_TypeDef* pKeyboard = &keyboard;
+//Keyboard_TypeDef* pKeyboard = &keyboard;
 	void interrupcao(){
-		ps2interrupt(pKeyboard);
+		ps2interrupt(&keyboard);
 	}
-
-
-
 /* USER CODE END 0 */
 
 /**
@@ -99,8 +85,6 @@ Keyboard_TypeDef* pKeyboard = &keyboard;
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	char a = 97;
-	char b = 65;
 
   /* USER CODE END 1 */
 
@@ -125,18 +109,21 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  keyboardBegin(pKeyboard, data_port, data_pin, iqr_port, iqr_pin);
-  print("teste\r\n");
+  keyboardBegin(&keyboard, data_port, data_pin, iqr_port, iqr_pin);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  char c = keyboardRead(pKeyboard);
-	  print("Resultado = %d\r\n", c);
-//	  print("Main funcionando\r\n", a, b);
-	  HAL_Delay(1000);
+	  if(keyboardAvailable(&keyboard)){
+	  	  		uint8_t c = keyboardRead(&keyboard);
+	  	  		if(c == PS2_ENTER){
+	  	  			HAL_UART_Transmit(&huart2, "\r\n", 2, 1000);
+	  	  		}
+	  	  	  	HAL_UART_Transmit(&huart2, &c, 1, 1000);
+	    	  }
+
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */

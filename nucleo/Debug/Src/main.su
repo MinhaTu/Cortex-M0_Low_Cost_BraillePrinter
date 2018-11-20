@@ -1,5 +1,4 @@
-main.c:59:6:print	16	static
-main.c:86:7:interrupcao	0	static
-main.c:153:6:SystemClock_Config	160	static
-main.c:99:5:main	48	static
-main.c:278:6:_Error_Handler	0	static
+main.c:75:7:interrupcao	0	static
+main.c:140:6:SystemClock_Config	160	static
+main.c:85:5:main	40	static
+main.c:265:6:_Error_Handler	0	static

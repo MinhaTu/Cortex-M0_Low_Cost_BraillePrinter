@@ -7,8 +7,7 @@
 
 
 #include "PS2Keyboard.h"
-#include "main.h"
-#define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+
 /* MUDEI
  * #define BUFFER_SIZE 45
 static volatile uint8_t buffer[BUFFER_SIZE];
@@ -24,7 +23,6 @@ const PS2Keymap_t *keymap= 0;
 //	keyboard->DataPin = GPIO_PIN_5;
 //}
 
-
 // The ISR for the external interrupt
 void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 {
@@ -33,9 +31,10 @@ void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 	static uint32_t prev_ms=0;
 	uint32_t now_ms;
 	uint8_t n, val;
+
 	val = HAL_GPIO_ReadPin(keyboard->DataPort, keyboard->DataPin); //MUDAR
 	now_ms = HAL_GetTick() ;//MUDAR millis N SEI SE FUNCIONA POSSIVEL ERRO
-	if (now_ms - prev_ms > 450) {
+	if (now_ms - prev_ms > 250) {
 		bitcount = 0;
 		incoming = 0;
 	}
@@ -55,7 +54,8 @@ void ps2interrupt(Keyboard_TypeDef* keyboard) //MUDAR
 		bitcount = 0;
 		incoming = 0;
 	}
-
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 }
 
 static inline uint8_t get_scan_code(Keyboard_TypeDef* keyboard)
@@ -71,7 +71,7 @@ static inline uint8_t get_scan_code(Keyboard_TypeDef* keyboard)
 	return c;
 }
 
-const PS2Keymap_t PS2Keymap_US = {
+const PROGMEM PS2Keymap_t PS2Keymap_US = {
   // without shift
 	{0, PS2_F9, 0, PS2_F5, PS2_F3, PS2_F1, PS2_F2, PS2_F12,
 	0, PS2_F10, PS2_F8, PS2_F6, PS2_F4, PS2_TAB, '`', 0,
@@ -186,7 +186,7 @@ static char get_iso8859_code(Keyboard_TypeDef* keyboard)
 	}
 }
 
-int keyboardAvailable(Keyboard_TypeDef* keyboard) {//MUDEI
+uint8_t keyboardAvailable(Keyboard_TypeDef* keyboard) {//MUDEI
 	if (keyboard->CharBuffer || keyboard->UTF8next) return 1;
 	keyboard->CharBuffer = get_iso8859_code(keyboard);
 	if (keyboard->CharBuffer) return 1;
@@ -203,7 +203,7 @@ uint8_t keyboardReadScanCode(Keyboard_TypeDef* keyboard) // MUDEI
 	return get_scan_code(keyboard);
 }
 
-int keyboardRead(Keyboard_TypeDef* keyboard) { //MUDEI
+uint8_t keyboardRead(Keyboard_TypeDef* keyboard) { //MUDEI
 	uint8_t result;
 
 	result = keyboard->UTF8next;
@@ -238,7 +238,7 @@ int keyboardReadUnicode(Keyboard_TypeDef* keyboard) { // MUDEI
 
 
 /*
- * Ã‰ NECESSÃ�RIO CONFIGURAR OS PINOS DE DADOS E INTERRUPÃ‡ÃƒO MANUALMENTE
+ * É NECESSÁRIO CONFIGURAR OS PINOS DE DADOS E INTERRUPÇÃO MANUALMENTE
  */
 void keyboardBegin(Keyboard_TypeDef* keyboard, GPIO_TypeDef* data_port, uint8_t data_pin, GPIO_TypeDef* iqr_port, uint8_t iqr_pin) {
   //uint8_t irq_num=255;
@@ -263,5 +263,5 @@ void keyboardBegin(Keyboard_TypeDef* keyboard, GPIO_TypeDef* data_port, uint8_t 
   keyboard->tail = 0;
   keyboard->CharBuffer = 0;
   keyboard->UTF8next = 0;
-  keyboard->keymap = 0;
+
 }

@@ -44,8 +44,7 @@
 /* Includes ------------------------------------------------------------------*/
 
 /* USER CODE BEGIN Includes */
-void print(const char *format,  ...);
-void interrupcao();
+
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
