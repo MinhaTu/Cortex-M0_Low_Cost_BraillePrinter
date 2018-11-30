@@ -1,0 +1,4 @@
+Red wire 	--> 3.3v
+Gray wire 	--> GND
+Blue wire	--> Data_Pin
+White wire 	--> Clock_Pin
