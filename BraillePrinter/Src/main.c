@@ -39,6 +39,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f0xx_hal.h"
+#include "string.h"
+
 
 /* USER CODE BEGIN Includes */
 
@@ -81,8 +83,14 @@ TIM_HandleTypeDef htim14;
 #define MOTOR_3_DIRECTION_B_PORT  GPIOA
 #define MOTOR_3_DIRECTION_B_PIN   GPIO_PIN_10
 
-#define MAX_CARACTERES 31
+#define MAX_CARACTERES 2
 #define MAX_LINHAS 27
+
+#define DELTA_COL_LIN 21
+#define DELTA_CHAR_H 16
+#define DELTA_CHAR_V 27
+
+#define MAX_POINT 96
 
 #define P_FRACTION 1.0     //Proportional factor of control loop 0.001 - 10.0 (1.0)
 #define STEP_MARGIN 1L     //10 - 1000 (1)
@@ -106,7 +114,56 @@ signed long setPoint_2 = 0;
 
 signed long actualPoint_1 = 0;
 signed long actualPoint_2 = 0;
-char pressedEnter = 0;
+char pressedEnter = 1;
+char isEnd = 0;
+
+unsigned char letrasBraille[28][3][2]={
+	{{1,0},{0,0},{0,0}},
+	{{1,0},{1,0},{0,0}},
+	{{1,1},{0,0},{0,0}},
+	{{1,1},{0,1},{0,0}},
+	{{1,0},{0,1},{0,0}},
+	{{1,1},{1,0},{0,0}},
+	{{1,1},{1,1},{0,0}},
+	{{1,0},{1,1},{0,0}},
+	{{0,1},{1,0},{0,0}},
+	{{0,1},{1,1},{0,0}},
+	{{1,0},{0,0},{1,0}},
+	{{1,0},{1,0},{1,0}},
+	{{1,1},{0,0},{1,0}},
+	{{1,1},{0,1},{1,0}},
+	{{1,0},{0,1},{1,0}},
+	{{1,1},{1,0},{1,0}},
+	{{1,1},{1,1},{1,0}},
+	{{1,0},{1,1},{1,0}},
+	{{0,1},{1,0},{1,0}},
+	{{0,1},{1,1},{1,0}},
+	{{1,0},{0,0},{1,1}},
+	{{1,0},{1,0},{1,1}},
+	{{0,1},{1,1},{0,1}},
+	{{1,1},{0,0},{1,1}},
+	{{1,1},{0,1},{1,1}},
+	{{1,0},{0,1},{1,1}},
+	{{0,0},{0,0},{0,0}}
+						};
+
+unsigned char numerosBraille[10][3][4]={
+	{{0,1,0,1},{0,1,1,1},{1,1,0,0}},
+	{{0,1,1,0},{0,1,0,0},{1,1,0,0}},
+	{{0,1,1,0},{0,1,1,0},{1,1,0,0}},
+	{{0,1,1,1},{0,1,0,0},{1,1,0,0}},
+	{{0,1,1,1},{0,1,0,1},{1,1,0,0}},
+	{{0,1,1,0},{0,1,0,1},{1,1,0,0}},
+	{{0,1,1,1},{0,1,1,0},{1,1,0,0}},
+	{{0,1,1,1},{0,1,1,1},{1,1,0,0}},
+	{{0,1,1,0},{0,1,1,1},{1,1,0,0}},
+	{{0,1,0,1},{0,1,1,0},{1,1,0,0}}
+									};
+
+unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
+unsigned char letterBraille[4];
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -117,13 +174,11 @@ static void MX_TIM3_Init(void);
 static void MX_TIM1_Init(void);                                    
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
-                                
-                                
-
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 void atualizarEixoX();
 void atualizarEixoY();
+void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter);
 
 /* USER CODE END PFP */
 
@@ -207,7 +262,6 @@ void atualizarEixoX(){
 	  }
 }
 
-
 void atualizarEixoY(){
 	 sensorStatus_2_A =  HAL_GPIO_ReadPin(SENSOR_2_A_PORT, SENSOR_2_A_PIN);
 	 sensorStatus_2_B =  HAL_GPIO_ReadPin(SENSOR_2_B_PORT, SENSOR_2_B_PIN);
@@ -249,7 +303,7 @@ void atualizarEixoY(){
 			  actualPoint_2--;
 		  }
 
-		  stepStatusOld_1 = 3;
+		  stepStatusOld_2 = 3;
 	  }
 
 	  /* Cálculo PWM */
@@ -270,23 +324,49 @@ void atualizarEixoY(){
 	  }
 	  if(abs((double)(setPoint_2 - actualPoint_2)) < STEP_MARGIN){
 			/* Desliga o motor pras duas direções */
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
 	  }
 	  else{
 		if(actualPoint_2 < setPoint_2){
 			/* Gira em uma direção */
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 255 - dutyCycle);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 255 - dutyCycle);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
 		}
 		if(actualPoint_2 > setPoint_2){
 			/* Gira na outra direção */
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 255 - dutyCycle);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 255 - dutyCycle);
 		}
 	  }
 }
 
+void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter){
+
+	if(letter>=48 && letter<=57){
+		for(int i=0;i<4;i++){
+			linhaBraille[i]=numerosBraille[letter-48][line][i];
+		}
+	}
+	else{
+		if(letter>=65 && letter<=90){
+			letter+=32;
+		}
+
+		for(int i=0;i<2;i++){
+			if(letter>=97 && letter<=122){
+				linhaBraille[i]=letrasBraille[letter-97][line][i];
+			}
+			if(letter==32){
+				linhaBraille[i]=0;
+			}
+		}
+		linhaBraille[2]='\0';
+		linhaBraille[3]='\0';
+
+
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -352,25 +432,57 @@ int main(void)
 
 	stepStatusOld_1 = 0;
 	stepStatusOld_2 = 0;
+
+	//memset(linhaBraille, 0, sizeof(linhaBraille));
+	memset(letterBraille, 0, sizeof(letterBraille));
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1)  {
+	/* USER CODE END WHILE */
 
-  /* USER CODE END WHILE */
+	/* USER CODE BEGIN 3 */
 
-  /* USER CODE BEGIN 3 */
- 	  atualizarEixoX();
+	/* Programa leitura do teclado */
+	if(pressedEnter){
+		for(int j=0;j<3;j++){
+		//Linhas das matrizes
+			for(int i=0;i<MAX_CARACTERES;i++){
+				//Recebe os pontos da linha para o caractere atual
+				fillLineWithBraille(letterBraille, j,linhaBraille[i]);
 
- 	  /* Programa leitura do teclado */
- 	  if(pressedEnter){
- 		  setPoint_1 += 30;
- 	  }
+				//Percorre os 4 bits no máximo para cada caractere
+				for(int x = 0; x < 4; ++x){
+					if(letterBraille[x] == '\0'){
+						break;
+					}else if(letterBraille[x] == 1){
+						//Furar
+					}
+					setPoint_1 += DELTA_COL_LIN;
+					while(abs((double)(setPoint_1 - actualPoint_1)) > STEP_MARGIN){
+						atualizarEixoX();
+					}
+				}
 
-   }
-  /* USER CODE END 3 */
+				setPoint_1 += DELTA_CHAR_H;
+				while(abs((double)(setPoint_1 - actualPoint_1)) > STEP_MARGIN){
+					atualizarEixoX();
+				}
+			}
+
+			setPoint_2 += DELTA_CHAR_V;
+			while(abs((double)(setPoint_2 - actualPoint_2)) > STEP_MARGIN){
+				atualizarEixoY();
+			}
+
+			pressedEnter = 0;
+		}
+	}
+
+  }
+	/* USER CODE END 3 */
 
 }
 
