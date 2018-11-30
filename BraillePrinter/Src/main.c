@@ -86,14 +86,14 @@ TIM_HandleTypeDef htim14;
 #define MAX_CARACTERES 2
 #define MAX_LINHAS 27
 
-#define DELTA_COL_LIN 21
-#define DELTA_CHAR_H 16
-#define DELTA_CHAR_V 27
+#define DELTA_COL_LIN 1021
+#define DELTA_CHAR_H 1016
+#define DELTA_CHAR_V 1027
 
-#define MAX_POINT 96
+#define MAX_POINT 1096
 
 #define P_FRACTION 1.0     //Proportional factor of control loop 0.001 - 10.0 (1.0)
-#define STEP_MARGIN 1L     //10 - 1000 (1)
+#define STEP_MARGIN 10     //10 - 1000 (1)
 
 #define MIN_DUTYCYCLE 100   //0 - 255 (125)
 #define MAX_DUTYCYCLE 127  //0 - 255 (255)
@@ -115,6 +115,7 @@ signed long setPoint_2 = 0;
 signed long actualPoint_1 = 0;
 signed long actualPoint_2 = 0;
 char pressedEnter = 1;
+char isDone = 0;
 char isEnd = 0;
 
 unsigned char letrasBraille[28][3][2]={
@@ -179,10 +180,19 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 void atualizarEixoX();
 void atualizarEixoY();
 void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter);
+double myABS(double num1);
 
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+double myABS(double num1){
+	if(num1 < 0){
+		num1 += -1;
+	}
+
+	return num1;
+}
+
 void atualizarEixoX(){
 	 sensorStatus_1_A =  HAL_GPIO_ReadPin(SENSOR_1_A_PORT, SENSOR_1_A_PIN);
 	 sensorStatus_1_B =  HAL_GPIO_ReadPin(SENSOR_1_B_PORT, SENSOR_1_B_PIN);
@@ -217,7 +227,7 @@ void atualizarEixoX(){
 		  stepStatusOld_1 = 2;
 	  }
 
-	  if(sensorStatus_1_A == GPIO_PIN_SET && sensorStatus_1_B == GPIO_PIN_SET){
+	  if(sensorStatus_1_A == GPIO_PIN_RESET && sensorStatus_1_B == GPIO_PIN_SET){
 		  if(stepStatusOld_1 == 2){
 			  actualPoint_1++;
 		  }else if(stepStatusOld_1 == 3){
@@ -228,7 +238,7 @@ void atualizarEixoX(){
 	  }
 
 	  /* Cálculo PWM */
-	  dutyCycle = abs((double)(setPoint_1 - actualPoint_1)) * (double)P_FRACTION;
+	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double)P_FRACTION;
 
 	  if(dutyCycle < MIN_DUTYCYCLE){
 		dutyCycle = MIN_DUTYCYCLE;
@@ -243,10 +253,11 @@ void atualizarEixoX(){
 	  if(dutyCycle > MAX_DUTYCYCLE){
 		dutyCycle = MAX_DUTYCYCLE;
 	  }
-	  if(abs((double)(setPoint_1 - actualPoint_1)) < STEP_MARGIN){
+	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
 			/* Desliga o motor pras duas direções */
 			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+			isDone = 1;
 	  }
 	  else{
 		if(actualPoint_1 < setPoint_1){
@@ -296,7 +307,7 @@ void atualizarEixoY(){
 		  stepStatusOld_2 = 2;
 	  }
 
-	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
+	  if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_SET){
 		  if(stepStatusOld_2 == 2){
 			  actualPoint_2++;
 		  }else if(stepStatusOld_2 == 3){
@@ -307,7 +318,7 @@ void atualizarEixoY(){
 	  }
 
 	  /* Cálculo PWM */
-	  dutyCycle = abs((double)(setPoint_2 - actualPoint_2)) * (double)P_FRACTION;
+	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double) P_FRACTION;
 
 	  if(dutyCycle < MIN_DUTYCYCLE){
 		dutyCycle = MIN_DUTYCYCLE;
@@ -322,10 +333,11 @@ void atualizarEixoY(){
 	  if(dutyCycle > MAX_DUTYCYCLE){
 		dutyCycle = MAX_DUTYCYCLE;
 	  }
-	  if(abs((double)(setPoint_2 - actualPoint_2)) < STEP_MARGIN){
+	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
 			/* Desliga o motor pras duas direções */
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
+			isDone = 1;
 	  }
 	  else{
 		if(actualPoint_2 < setPoint_2){
@@ -461,21 +473,24 @@ int main(void)
 						//Furar
 					}
 					setPoint_1 += DELTA_COL_LIN;
-					while(abs((double)(setPoint_1 - actualPoint_1)) > STEP_MARGIN){
+					while(isDone == 0){
 						atualizarEixoX();
 					}
+					isDone = 0;
 				}
 
 				setPoint_1 += DELTA_CHAR_H;
-				while(abs((double)(setPoint_1 - actualPoint_1)) > STEP_MARGIN){
+				while(isDone == 0){
 					atualizarEixoX();
 				}
+				isDone = 0;
 			}
 
 			setPoint_2 += DELTA_CHAR_V;
-			while(abs((double)(setPoint_2 - actualPoint_2)) > STEP_MARGIN){
+			while(isDone == 0){
 				atualizarEixoY();
 			}
+			isDone = 0;
 
 			pressedEnter = 0;
 		}
