@@ -123,6 +123,7 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 void atualizarEixoX();
+void atualizarEixoY();
 
 /* USER CODE END PFP */
 
@@ -199,6 +200,86 @@ void atualizarEixoX(){
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 		}
 		if(actualPoint_1 > setPoint_1){
+			/* Gira na outra direção */
+			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 255 - dutyCycle);
+		}
+	  }
+}
+
+
+void atualizarEixoY(){
+	 sensorStatus_2_A =  HAL_GPIO_ReadPin(SENSOR_2_A_PORT, SENSOR_2_A_PIN);
+	 sensorStatus_2_B =  HAL_GPIO_ReadPin(SENSOR_2_B_PORT, SENSOR_2_B_PIN);
+
+	  if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_RESET){
+		  if(stepStatusOld_2 == 3){
+			  actualPoint_2++;
+		  }else if(stepStatusOld_2 == 1){
+			  actualPoint_2--;
+		  }
+
+		  stepStatusOld_2 = 0;
+	  }
+
+	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_RESET){
+		  if(stepStatusOld_2 == 0){
+			  actualPoint_2++;
+		  }else if(stepStatusOld_2 == 2){
+			  actualPoint_2--;
+		  }
+
+		  stepStatusOld_2 = 1;
+	  }
+
+	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
+		  if(stepStatusOld_2 == 1){
+			  actualPoint_2++;
+		  }else if(stepStatusOld_2 == 3){
+			  actualPoint_2--;
+		  }
+
+		  stepStatusOld_2 = 2;
+	  }
+
+	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
+		  if(stepStatusOld_2 == 2){
+			  actualPoint_2++;
+		  }else if(stepStatusOld_2 == 3){
+			  actualPoint_2--;
+		  }
+
+		  stepStatusOld_1 = 3;
+	  }
+
+	  /* Cálculo PWM */
+	  dutyCycle = abs((double)(setPoint_2 - actualPoint_2)) * (double)P_FRACTION;
+
+	  if(dutyCycle < MIN_DUTYCYCLE){
+		dutyCycle = MIN_DUTYCYCLE;
+	  }
+	  if(dutyCycle > MAX_DUTYCYCLE){
+		dutyCycle = MAX_DUTYCYCLE;
+	  }
+
+	  if(dutyCycle < MIN_DUTYCYCLE){
+		dutyCycle = MIN_DUTYCYCLE;
+	  }
+	  if(dutyCycle > MAX_DUTYCYCLE){
+		dutyCycle = MAX_DUTYCYCLE;
+	  }
+	  if(abs((double)(setPoint_2 - actualPoint_2)) < STEP_MARGIN){
+			/* Desliga o motor pras duas direções */
+			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+	  }
+	  else{
+		if(actualPoint_2 < setPoint_2){
+			/* Gira em uma direção */
+			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 255 - dutyCycle);
+			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
+		}
+		if(actualPoint_2 > setPoint_2){
 			/* Gira na outra direção */
 			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 255 - dutyCycle);
