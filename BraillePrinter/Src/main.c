@@ -161,7 +161,8 @@ unsigned char numerosBraille[10][3][4]={
 	{{0,1,0,1},{0,1,1,0},{1,1,0,0}}
 									};
 
-unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
+//unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
+unsigned char BUFFER[MAX_CARACTERES] = {'A', 'B'};
 unsigned char letterBraille[4];
 
 
@@ -353,6 +354,12 @@ void atualizarEixoY(){
 	  }
 }
 
+/* Para letras: preenche os 2 pontos referentes à linha do caractere informado
+ * Para números: preenche os 3 pontos referentes à linha do caractere informado
+ * linhaBraille: a linha de um caractere
+ * line: a linha que vai ser alocada ou 0, ou 1, ou 2
+ * letter: letra recebida do teclado
+ */
 void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter){
 
 	if(letter>=48 && letter<=57){
@@ -463,7 +470,7 @@ int main(void)
 		//Linhas das matrizes
 			for(int i=0;i<MAX_CARACTERES;i++){
 				//Recebe os pontos da linha para o caractere atual
-				fillLineWithBraille(letterBraille, j,linhaBraille[i]);
+				fillLineWithBraille(letterBraille, j,BUFFER[i]);
 
 				//Percorre os 4 bits no máximo para cada caractere
 				for(int x = 0; x < 4; ++x){
