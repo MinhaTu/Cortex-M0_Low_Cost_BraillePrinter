@@ -49,6 +49,32 @@
 
 /* Private define ------------------------------------------------------------*/
 
+#define SENSOR_1_A_Pin GPIO_PIN_0
+#define SENSOR_1_A_GPIO_Port GPIOF
+#define SENSOR_1_B_Pin GPIO_PIN_1
+#define SENSOR_1_B_GPIO_Port GPIOF
+#define DATA___Keyboard_Pin GPIO_PIN_0
+#define DATA___Keyboard_GPIO_Port GPIOA
+#define DATA___Keyboard_EXTI_IRQn EXTI0_1_IRQn
+#define CLK___Keyboard_Pin GPIO_PIN_1
+#define CLK___Keyboard_GPIO_Port GPIOA
+#define SENSOR_2_A_Pin GPIO_PIN_2
+#define SENSOR_2_A_GPIO_Port GPIOA
+#define SENSOR_2___B_Pin GPIO_PIN_3
+#define SENSOR_2___B_GPIO_Port GPIOA
+#define Motor___X___A_Pin GPIO_PIN_4
+#define Motor___X___A_GPIO_Port GPIOA
+#define MOTOR___X___B_Pin GPIO_PIN_6
+#define MOTOR___X___B_GPIO_Port GPIOA
+#define MOTOR_Y___A_Pin GPIO_PIN_7
+#define MOTOR_Y___A_GPIO_Port GPIOA
+#define MOTOR_Y___B_Pin GPIO_PIN_1
+#define MOTOR_Y___B_GPIO_Port GPIOB
+#define MOTOR_Z___A_Pin GPIO_PIN_9
+#define MOTOR_Z___A_GPIO_Port GPIOA
+#define MOTOR_Z___B_Pin GPIO_PIN_10
+#define MOTOR_Z___B_GPIO_Port GPIOA
+
 /* ########################## Assert Selection ############################## */
 /**
   * @brief Uncomment the line below to expanse the "assert_param" macro in the 

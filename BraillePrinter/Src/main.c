@@ -39,8 +39,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f0xx_hal.h"
-#include "string.h"
-
 
 /* USER CODE BEGIN Includes */
 #include "PS2Keyboard.h"
@@ -146,6 +144,9 @@ static void MX_TIM3_Init(void);
 static void MX_TIM1_Init(void);                                    
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
                                 
+                                
+                                
+
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 void atualizarEixoX();
@@ -164,50 +165,69 @@ double myABS(double num1){
 }
 
 void atualizarEixoX(){
+
+	 // Faz a leitura do estado do enconder - 00,01,10,11
 	 sensorStatus_1_A =  HAL_GPIO_ReadPin(SENSOR_1_A_PORT, SENSOR_1_A_PIN);
 	 sensorStatus_1_B =  HAL_GPIO_ReadPin(SENSOR_1_B_PORT, SENSOR_1_B_PIN);
 
+	 // Caso 00: Os dois sensores, A e B, do encoder detectaram uma fita preta
 	  if(sensorStatus_1_A == GPIO_PIN_RESET && sensorStatus_1_B == GPIO_PIN_RESET){
+		  // Se o estado antigo é 3, incrementa a posição atual.
+		  // Se o estado antigo é 1, decrementa a posição atual
 		  if(stepStatusOld_1 == 3){
 			  actualPoint_1++;
 		  }else if(stepStatusOld_1 == 1){
 			  actualPoint_1--;
 		  }
 
+		  //Seta o estado antigo para 0
 		  stepStatusOld_1 = 0;
 	  }
 
+	  // Caso 10: sensor A do enconder, não detecta a fita preta, sensor B do encoder detecta a fita preta
 	  if(sensorStatus_1_A == GPIO_PIN_SET && sensorStatus_1_B == GPIO_PIN_RESET){
+		  // Se o estado antigo é 0, incrementa a posição atual
+		  // Se o estado antigo é 2, decrementa a posição atual
 		  if(stepStatusOld_1 == 0){
 			  actualPoint_1++;
 		  }else if(stepStatusOld_1 == 2){
 			  actualPoint_1--;
 		  }
 
+		  //Seta o estado antigo para 1
 		  stepStatusOld_1 = 1;
 	  }
 
+	  // Caso 11: Os dois sensores, A e B, do encoder não detectaram uma fita preta
 	  if(sensorStatus_1_A == GPIO_PIN_SET && sensorStatus_1_B == GPIO_PIN_SET){
+		  // Se o estado antigo é 1, incrementa a posição atual
+		  // Se o estado antigo é 3, decrementa a posição atual
 		  if(stepStatusOld_1 == 1){
 			  actualPoint_1++;
 		  }else if(stepStatusOld_1 == 3){
 			  actualPoint_1--;
 		  }
 
+		  //Seta o estado antigo para 2
 		  stepStatusOld_1 = 2;
 	  }
 
+	  // Caso 01: sensor A do enconder, detecta a fita preta, sensor B do encoder não detecta a fita preta
 	  if(sensorStatus_1_A == GPIO_PIN_RESET && sensorStatus_1_B == GPIO_PIN_SET){
+		  // Se o estado antigo é 2, incrementa a posição atual
+		  // Se o estado antigo é 3, decrementa a posição atual
 		  if(stepStatusOld_1 == 2){
 			  actualPoint_1++;
 		  }else if(stepStatusOld_1 == 3){
 			  actualPoint_1--;
 		  }
 
+		  //Seta o estado antigo para 3
 		  stepStatusOld_1 = 3;
 	  }
 
-	  /* Cálculo PWM */
+	  // Cálculo PWM - Quando está do destino, diminui a velocidade do motor
+
 	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double)P_FRACTION;
 
 	  if(dutyCycle < MIN_DUTYCYCLE){
@@ -223,20 +243,25 @@ void atualizarEixoX(){
 	  if(dutyCycle > MAX_DUTYCYCLE){
 		dutyCycle = MAX_DUTYCYCLE;
 	  }
+
+	  // Caso a diferença do ponto atual e o ponto de destino esteja dentro da margem de erro, desabilita o motor
 	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
-			/* Desliga o motor pras duas direções */
+			// Desliga o motor pras duas direções
 			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 			isDone = 1;
 	  }
 	  else{
+		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
 		if(actualPoint_1 < setPoint_1){
-			/* Gira em uma direção */
+			// Gira em uma direção
 			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 255 - dutyCycle);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
 		}
+
+		// Caso o ponto de destino seja menor que o ponto atual, liga o mtor para a outra direção
 		if(actualPoint_1 > setPoint_1){
-			/* Gira na outra direção */
+			// Gira na outra direção
 			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 255 - dutyCycle);
 		}
@@ -244,50 +269,67 @@ void atualizarEixoX(){
 }
 
 void atualizarEixoY(){
+	 // Faz a leitura do estado do enconder - 00,01,10,11
 	 sensorStatus_2_A =  HAL_GPIO_ReadPin(SENSOR_2_A_PORT, SENSOR_2_A_PIN);
 	 sensorStatus_2_B =  HAL_GPIO_ReadPin(SENSOR_2_B_PORT, SENSOR_2_B_PIN);
 
-	  if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_RESET){
-		  if(stepStatusOld_2 == 3){
+	 // Caso 00: Os dois sensores, A e B, do encoder detectaram uma fita preta
+	 if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_RESET){
+		 // Se o estado antigo é 3, incrementa a posição atual.
+		 // Se o estado antigo é 1, decrementa a posição atual
+		 if(stepStatusOld_2 == 3){
 			  actualPoint_2++;
 		  }else if(stepStatusOld_2 == 1){
 			  actualPoint_2--;
 		  }
 
+		 //Seta o estado antigo para 0
 		  stepStatusOld_2 = 0;
 	  }
 
-	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_RESET){
-		  if(stepStatusOld_2 == 0){
-			  actualPoint_2++;
-		  }else if(stepStatusOld_2 == 2){
-			  actualPoint_2--;
-		  }
+	 // Caso 10: sensor A do enconder, não detecta a fita preta, sensor B do encoder detecta a fita preta
+	 if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_RESET){
+		 // Se o estado antigo é 0, incrementa a posição atual
+		 // Se o estado antigo é 2, decrementa a posição atual
 
-		  stepStatusOld_2 = 1;
+		if(stepStatusOld_2 == 0){
+		  actualPoint_2++;
+		}else if(stepStatusOld_2 == 2){
+		  actualPoint_2--;
+		}
+
+		//Seta o estado antigo para 1
+		stepStatusOld_2 = 1;
 	  }
-
-	  if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
-		  if(stepStatusOld_2 == 1){
-			  actualPoint_2++;
-		  }else if(stepStatusOld_2 == 3){
-			  actualPoint_2--;
-		  }
-
-		  stepStatusOld_2 = 2;
-	  }
-
-	  if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_SET){
-		  if(stepStatusOld_2 == 2){
+	 // Caso 11: Os dois sensores, A e B, do encoder não detectaram uma fita preta
+	 if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
+		 // Se o estado antigo é 1, incrementa a posição atual
+		 // Se o estado antigo é 3, decrementa a posição atual
+		 if(stepStatusOld_2 == 1){
 			  actualPoint_2++;
 		  }else if(stepStatusOld_2 == 3){
 			  actualPoint_2--;
 		  }
 
-		  stepStatusOld_2 = 3;
+		 //Seta o estado antigo para 2
+		 stepStatusOld_2 = 2;
 	  }
 
-	  /* Cálculo PWM */
+	 // Caso 01: sensor A do enconder, detecta a fita preta, sensor B do encoder não detecta a fita preta
+	 if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_SET){
+		 // Se o estado antigo é 2, incrementa a posição atual
+		 // Se o estado antigo é 3, decrementa a posição atual
+		if(stepStatusOld_2 == 2){
+		  actualPoint_2++;
+		}else if(stepStatusOld_2 == 3){
+		  actualPoint_2--;
+		}
+
+		 //Seta o estado antigo para 3
+		 stepStatusOld_2 = 3;
+	  }
+
+	 // Cálculo PWM - Quando está do destino, diminui a velocidade do motor
 	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double) P_FRACTION;
 
 	  if(dutyCycle < MIN_DUTYCYCLE){
@@ -303,20 +345,25 @@ void atualizarEixoY(){
 	  if(dutyCycle > MAX_DUTYCYCLE){
 		dutyCycle = MAX_DUTYCYCLE;
 	  }
+
+	  // Caso a diferença do ponto atual e o ponto de destino esteja dentro da margem de erro, desabilita o motor
 	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
-			/* Desliga o motor pras duas direções */
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
-			isDone = 1;
+		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
+		isDone = 1;
 	  }
 	  else{
+		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
 		if(actualPoint_2 < setPoint_2){
-			/* Gira em uma direção */
+			// Gira em uma direção
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 255 - dutyCycle);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
 		}
+
+		// Caso o ponto de destino seja menor que o ponto atual, liga o mtor para a outra direção
 		if(actualPoint_2 > setPoint_2){
-			/* Gira na outra direção */
+			// Gira na outra direção
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
 			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 255 - dutyCycle);
 		}
@@ -399,9 +446,9 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)  {
-	/* USER CODE END WHILE */
+  /* USER CODE END WHILE */
 
-	/* USER CODE BEGIN 3 */
+  /* USER CODE BEGIN 3 */
 	/* Faz a leitura do teclado e envia ao buffer_char */
 	if(keyboardAvailable(&keyboard)){
 		uint8_t c = keyboardRead(&keyboard);
@@ -452,7 +499,7 @@ int main(void)
 	clearBuffer(buffer_char);
 
   }
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 
 }
 
@@ -662,17 +709,33 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pins : PF0 PF1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+  /*Configure GPIO pins : SENSOR_1_A_Pin SENSOR_1_B_Pin */
+  GPIO_InitStruct.Pin = SENSOR_1_A_Pin|SENSOR_1_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA0 PA1 PA2 PA3 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  /*Configure GPIO pin : DATA___Keyboard_Pin */
+  GPIO_InitStruct.Pin = DATA___Keyboard_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(DATA___Keyboard_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : CLK___Keyboard_Pin */
+  GPIO_InitStruct.Pin = CLK___Keyboard_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(CLK___Keyboard_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : SENSOR_2_A_Pin SENSOR_2___B_Pin */
+  GPIO_InitStruct.Pin = SENSOR_2_A_Pin|SENSOR_2___B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_1_IRQn);
 
 }
 
