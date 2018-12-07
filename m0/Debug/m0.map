@@ -1,16 +1,16 @@
 Archive member included to satisfy reference by file (symbol)
 
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
                               startup/startup_stm32f030x6.o (__libc_init_array)
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
                               Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o (memcpy)
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
                               Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o (__gnu_thumb1_case_uqi)
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
                               Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o (__aeabi_uidiv)
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
-                              /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
-/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
+                              /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
                               Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o (__aeabi_llsr)
 
 Allocating common symbols
@@ -22,10 +22,10 @@ pFlash              0x20              Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx
 
 Discarded input sections
 
- .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
- .data          0x0000000000000000        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+ .data          0x0000000000000000        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
  .text          0x0000000000000000        0x0 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .data          0x0000000000000000        0x0 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .bss           0x0000000000000000        0x0 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
@@ -110,7 +110,7 @@ Discarded input sections
                 0x0000000000000000       0x78 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
  .debug_ranges  0x0000000000000000       0xe8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
  .debug_line    0x0000000000000000      0x54f Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
- .debug_str     0x0000000000000000      0xa75 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
+ .debug_str     0x0000000000000000      0xa77 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
  .debug_frame   0x0000000000000000      0x154 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
  .ARM.attributes
@@ -151,7 +151,7 @@ Discarded input sections
                 0x0000000000000000       0x78 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
  .debug_ranges  0x0000000000000000       0xb0 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
  .debug_line    0x0000000000000000      0x485 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
- .debug_str     0x0000000000000000      0x968 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
+ .debug_str     0x0000000000000000      0x96a Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
  .debug_frame   0x0000000000000000      0x130 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
  .ARM.attributes
@@ -185,7 +185,7 @@ Discarded input sections
                 0x0000000000000000       0x60 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
  .debug_ranges  0x0000000000000000      0x100 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
  .debug_line    0x0000000000000000      0x49c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
- .debug_str     0x0000000000000000      0xa55 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
+ .debug_str     0x0000000000000000      0xa57 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
  .debug_frame   0x0000000000000000       0xe8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.o
  .ARM.attributes
@@ -351,7 +351,7 @@ Discarded input sections
                 0x0000000000000000      0x200 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
  .debug_ranges  0x0000000000000000      0x280 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
  .debug_line    0x0000000000000000     0x160c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
- .debug_str     0x0000000000000000     0x12c9 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
+ .debug_str     0x0000000000000000     0x12cb Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
  .debug_frame   0x0000000000000000      0x794 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.o
  .ARM.attributes
@@ -374,7 +374,7 @@ Discarded input sections
                 0x0000000000000000       0x38 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
  .debug_ranges  0x0000000000000000       0x68 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
  .debug_line    0x0000000000000000      0x347 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
- .debug_str     0x0000000000000000      0xc00 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
+ .debug_str     0x0000000000000000      0xc02 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
  .debug_frame   0x0000000000000000       0x88 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.o
  .ARM.attributes
@@ -413,7 +413,7 @@ Discarded input sections
                 0x0000000000000000       0x78 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
  .debug_ranges  0x0000000000000000       0x68 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
  .debug_line    0x0000000000000000      0x367 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
- .debug_str     0x0000000000000000      0x80c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
+ .debug_str     0x0000000000000000      0x80e Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
  .debug_frame   0x0000000000000000       0xd8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.o
  .ARM.attributes
@@ -426,7 +426,7 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x18 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
  .debug_line    0x0000000000000000      0x1bb Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
- .debug_str     0x0000000000000000      0x61a Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
+ .debug_str     0x0000000000000000      0x61c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
  .ARM.attributes
                 0x0000000000000000       0x31 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.o
@@ -467,7 +467,7 @@ Discarded input sections
                 0x0000000000000000       0x30 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
  .debug_ranges  0x0000000000000000       0x40 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
  .debug_line    0x0000000000000000      0x393 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
- .debug_str     0x0000000000000000      0x806 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
+ .debug_str     0x0000000000000000      0x808 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
  .debug_frame   0x0000000000000000       0x58 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.o
  .ARM.attributes
@@ -480,7 +480,7 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x18 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
  .debug_line    0x0000000000000000      0x1bb Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
- .debug_str     0x0000000000000000      0x617 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
+ .debug_str     0x0000000000000000      0x619 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
  .ARM.attributes
                 0x0000000000000000       0x31 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.o
@@ -492,7 +492,7 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x18 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
  .debug_line    0x0000000000000000      0x1bb Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
- .debug_str     0x0000000000000000      0x61a Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
+ .debug_str     0x0000000000000000      0x61c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
  .comment       0x0000000000000000       0x7d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
  .ARM.attributes
                 0x0000000000000000       0x31 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.o
@@ -526,35 +526,35 @@ Discarded input sections
  .text          0x0000000000000000       0x14 startup/startup_stm32f030x6.o
  .data          0x0000000000000000        0x0 startup/startup_stm32f030x6.o
  .bss           0x0000000000000000        0x0 startup/startup_stm32f030x6.o
- .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
- .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .text          0x0000000000000000       0x14 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+ .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .text          0x0000000000000000       0x14 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
  .ARM.attributes
-                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
- .text          0x0000000000000000       0x18 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
+                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_thumb1_case_uqi.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
+ .text          0x0000000000000000       0x18 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
  .ARM.attributes
-                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
- .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
- .eh_frame      0x0000000000000000        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_lshrdi3.o)
+ .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+ .eh_frame      0x0000000000000000        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
  .ARM.attributes
-                0x0000000000000000       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
- .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
- .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
- .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+                0x0000000000000000       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+ .text          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+ .data          0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+ .bss           0x0000000000000000        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
 
 Memory Configuration
 
@@ -565,8 +565,8 @@ FLASH            0x0000000008000000 0x0000000000004000 xr
 
 Linker script and memory map
 
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
 LOAD Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
 LOAD Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
 LOAD Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.o
@@ -589,25 +589,25 @@ LOAD Src/system_stm32f0xx.o
 LOAD startup/startup_stm32f030x6.o
                 0x0000000000000080                malloc_getpagesize_P = 0x80
 START GROUP
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libm.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libm.a
 END GROUP
 START GROUP
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
 END GROUP
 START GROUP
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libnosys.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libnosys.a
 END GROUP
 START GROUP
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libnosys.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libnosys.a
 END GROUP
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
-LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtend.o
+LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
                 0x0000000020001000                _estack = 0x20001000
                 0x0000000000000200                _Min_Heap_Size = 0x200
                 0x0000000000000400                _Min_Stack_Size = 0x400
@@ -622,12 +622,12 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
 .text           0x00000000080000c0      0xe84
                 0x00000000080000c0                . = ALIGN (0x4)
  *(.text)
- .text          0x00000000080000c0       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
- .text          0x0000000008000108      0x114 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+ .text          0x00000000080000c0       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .text          0x0000000008000108      0x114 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
                 0x0000000008000108                __udivsi3
                 0x0000000008000108                __aeabi_uidiv
                 0x0000000008000214                __aeabi_uidivmod
- .text          0x000000000800021c        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
+ .text          0x000000000800021c        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
                 0x000000000800021c                __aeabi_ldiv0
                 0x000000000800021c                __aeabi_idiv0
  *(.text*)
@@ -768,9 +768,9 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000008000ecc                TIM1_BRK_UP_TRG_COM_IRQHandler
  *fill*         0x0000000008000ece        0x2 
  .text.__libc_init_array
-                0x0000000008000ed0       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+                0x0000000008000ed0       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
                 0x0000000008000ed0                __libc_init_array
- .text.memcpy   0x0000000008000f18       0x12 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .text.memcpy   0x0000000008000f18       0x12 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
                 0x0000000008000f18                memcpy
  *(.glue_7)
  .glue_7        0x0000000008000f2a        0x0 linker stubs
@@ -778,15 +778,15 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
  .glue_7t       0x0000000008000f2a        0x0 linker stubs
  *(.eh_frame)
  *fill*         0x0000000008000f2a        0x2 
- .eh_frame      0x0000000008000f2c        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .eh_frame      0x0000000008000f2c        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
  *(.init)
- .init          0x0000000008000f2c        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+ .init          0x0000000008000f2c        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
                 0x0000000008000f2c                _init
- .init          0x0000000008000f30        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+ .init          0x0000000008000f30        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
  *(.fini)
- .fini          0x0000000008000f38        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+ .fini          0x0000000008000f38        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
                 0x0000000008000f38                _fini
- .fini          0x0000000008000f3c        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+ .fini          0x0000000008000f3c        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
                 0x0000000008000f44                . = ALIGN (0x4)
                 0x0000000008000f44                _etext = .
 
@@ -797,7 +797,7 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
  .v4_bx         0x0000000008000f44        0x0 linker stubs
 
 .iplt           0x0000000008000f44        0x0
- .iplt          0x0000000008000f44        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .iplt          0x0000000008000f44        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
 
 .rodata         0x0000000008000f44      0x200
                 0x0000000008000f44                . = ALIGN (0x4)
@@ -815,7 +815,7 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000008001144                . = ALIGN (0x4)
 
 .rel.dyn        0x0000000008001144        0x0
- .rel.iplt      0x0000000008001144        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .rel.iplt      0x0000000008001144        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
@@ -834,14 +834,14 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000008001144                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x0000000008001144        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .init_array    0x0000000008001144        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 0x0000000008001148                PROVIDE (__init_array_end, .)
 
 .fini_array     0x0000000008001148        0x4
                 [!provide]                        PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0000000008001148        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .fini_array    0x0000000008001148        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end, .)
                 0x000000000800114c                _sidata = LOADADDR (.data)
 
@@ -857,14 +857,14 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000020000004                _edata = .
 
 .igot.plt       0x0000000020000004        0x0 load address 0x0000000008001150
- .igot.plt      0x0000000020000004        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .igot.plt      0x0000000020000004        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 0x0000000020000004                . = ALIGN (0x4)
 
 .bss            0x0000000020000004       0x70 load address 0x0000000008001150
                 0x0000000020000004                _sbss = .
                 0x0000000020000004                __bss_start__ = _sbss
  *(.bss)
- .bss           0x0000000020000004       0x1c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .bss           0x0000000020000004       0x1c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
  *(.bss*)
  .bss.bitcount.6240
                 0x0000000020000020        0x1 Src/PS2Keyboard.o
@@ -905,9 +905,9 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000000000000       0x28
  *(.ARM.attributes)
  .ARM.attributes
-                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+                0x0000000000000000       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
  .ARM.attributes
-                0x000000000000001e       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+                0x000000000000001e       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
  .ARM.attributes
                 0x000000000000004a       0x31 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .ARM.attributes
@@ -929,18 +929,18 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
  .ARM.attributes
                 0x0000000000000203       0x21 startup/startup_stm32f030x6.o
  .ARM.attributes
-                0x0000000000000224       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+                0x0000000000000224       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x0000000000000250       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x0000000000000250       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
  .ARM.attributes
-                0x000000000000027c       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+                0x000000000000027c       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x000000000000029a       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
+                0x000000000000029a       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x00000000000002b8       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+                0x00000000000002b8       0x1e /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
 OUTPUT(m0.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x7dbf
+.debug_info     0x0000000000000000     0x7dc1
  .debug_info    0x0000000000000000      0xe2b Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .debug_info    0x0000000000000e2b      0xfdb Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
  .debug_info    0x0000000000001e06      0xe4c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o
@@ -950,7 +950,7 @@ OUTPUT(m0.elf elf32-littlearm)
  .debug_info    0x0000000000005d7d      0xb22 Src/stm32f0xx_hal_msp.o
  .debug_info    0x000000000000689f      0xa45 Src/stm32f0xx_it.o
  .debug_info    0x00000000000072e4      0xa67 Src/system_stm32f0xx.o
- .debug_info    0x0000000000007d4b       0x74 startup/startup_stm32f030x6.o
+ .debug_info    0x0000000000007d4b       0x76 startup/startup_stm32f030x6.o
 
 .debug_abbrev   0x0000000000000000     0x16e6
  .debug_abbrev  0x0000000000000000      0x2d1 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
@@ -1019,25 +1019,25 @@ OUTPUT(m0.elf elf32-littlearm)
  .debug_line    0x0000000000001dc9      0x23c Src/system_stm32f0xx.o
  .debug_line    0x0000000000002005       0x83 startup/startup_stm32f030x6.o
 
-.debug_str      0x0000000000000000     0x12e9
- .debug_str     0x0000000000000000      0x977 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
-                                        0xa04 (size before relaxing)
- .debug_str     0x0000000000000977      0x1f8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
-                                        0xa0c (size before relaxing)
- .debug_str     0x0000000000000b6f      0x1cc Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o
-                                        0x866 (size before relaxing)
- .debug_str     0x0000000000000d3b      0x2e7 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o
-                                        0xa46 (size before relaxing)
- .debug_str     0x0000000000001022      0x17c Src/PS2Keyboard.o
-                                        0x805 (size before relaxing)
- .debug_str     0x000000000000119e       0x64 Src/main.o
-                                        0xb60 (size before relaxing)
- .debug_str     0x0000000000001202       0x1b Src/stm32f0xx_hal_msp.o
-                                        0x7c1 (size before relaxing)
- .debug_str     0x000000000000121d       0x72 Src/stm32f0xx_it.o
-                                        0x6e6 (size before relaxing)
- .debug_str     0x000000000000128f       0x5a Src/system_stm32f0xx.o
-                                        0x68c (size before relaxing)
+.debug_str      0x0000000000000000     0x12eb
+ .debug_str     0x0000000000000000      0x979 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
+                                        0xa06 (size before relaxing)
+ .debug_str     0x0000000000000979      0x1f8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
+                                        0xa0e (size before relaxing)
+ .debug_str     0x0000000000000b71      0x1cc Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o
+                                        0x868 (size before relaxing)
+ .debug_str     0x0000000000000d3d      0x2e7 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o
+                                        0xa48 (size before relaxing)
+ .debug_str     0x0000000000001024      0x17c Src/PS2Keyboard.o
+                                        0x807 (size before relaxing)
+ .debug_str     0x00000000000011a0       0x64 Src/main.o
+                                        0xb62 (size before relaxing)
+ .debug_str     0x0000000000001204       0x1b Src/stm32f0xx_hal_msp.o
+                                        0x7c3 (size before relaxing)
+ .debug_str     0x000000000000121f       0x72 Src/stm32f0xx_it.o
+                                        0x6e8 (size before relaxing)
+ .debug_str     0x0000000000001291       0x5a Src/system_stm32f0xx.o
+                                        0x68e (size before relaxing)
 
 .comment        0x0000000000000000       0x7c
  .comment       0x0000000000000000       0x7c Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
@@ -1061,6 +1061,6 @@ OUTPUT(m0.elf elf32-littlearm)
  .debug_frame   0x000000000000059c       0x2c Src/stm32f0xx_hal_msp.o
  .debug_frame   0x00000000000005c8       0x80 Src/stm32f0xx_it.o
  .debug_frame   0x0000000000000648       0x3c Src/system_stm32f0xx.o
- .debug_frame   0x0000000000000684       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
- .debug_frame   0x00000000000006b0       0x28 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00000000000006d8       0x20 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000000684       0x2c /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000006b0       0x28 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000000000006d8       0x20 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/libgcc.a(_udivsi3.o)

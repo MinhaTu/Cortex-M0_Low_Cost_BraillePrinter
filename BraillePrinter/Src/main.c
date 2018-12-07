@@ -43,7 +43,8 @@
 
 
 /* USER CODE BEGIN Includes */
-
+#include "PS2Keyboard.h"
+#include "brailleMatrix.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -83,6 +84,11 @@ TIM_HandleTypeDef htim14;
 #define MOTOR_3_DIRECTION_B_PORT  GPIOA
 #define MOTOR_3_DIRECTION_B_PIN   GPIO_PIN_10
 
+#define PS2_DATA_PORT 			  GPIOA
+#define PS2_DATA_PIN			  GPIO_PIN_1
+#define PS2_IQR_PORT			  GPIOA
+#define PS2_IQR_PIN				  GPIO_PIN_0
+
 #define MAX_CARACTERES 2
 #define MAX_LINHAS 27
 
@@ -118,52 +124,16 @@ char pressedEnter = 1;
 char isDone = 0;
 char isEnd = 0;
 
-unsigned char letrasBraille[28][3][2]={
-	{{1,0},{0,0},{0,0}},
-	{{1,0},{1,0},{0,0}},
-	{{1,1},{0,0},{0,0}},
-	{{1,1},{0,1},{0,0}},
-	{{1,0},{0,1},{0,0}},
-	{{1,1},{1,0},{0,0}},
-	{{1,1},{1,1},{0,0}},
-	{{1,0},{1,1},{0,0}},
-	{{0,1},{1,0},{0,0}},
-	{{0,1},{1,1},{0,0}},
-	{{1,0},{0,0},{1,0}},
-	{{1,0},{1,0},{1,0}},
-	{{1,1},{0,0},{1,0}},
-	{{1,1},{0,1},{1,0}},
-	{{1,0},{0,1},{1,0}},
-	{{1,1},{1,0},{1,0}},
-	{{1,1},{1,1},{1,0}},
-	{{1,0},{1,1},{1,0}},
-	{{0,1},{1,0},{1,0}},
-	{{0,1},{1,1},{1,0}},
-	{{1,0},{0,0},{1,1}},
-	{{1,0},{1,0},{1,1}},
-	{{0,1},{1,1},{0,1}},
-	{{1,1},{0,0},{1,1}},
-	{{1,1},{0,1},{1,1}},
-	{{1,0},{0,1},{1,1}},
-	{{0,0},{0,0},{0,0}}
-						};
 
-unsigned char numerosBraille[10][3][4]={
-	{{0,1,0,1},{0,1,1,1},{1,1,0,0}},
-	{{0,1,1,0},{0,1,0,0},{1,1,0,0}},
-	{{0,1,1,0},{0,1,1,0},{1,1,0,0}},
-	{{0,1,1,1},{0,1,0,0},{1,1,0,0}},
-	{{0,1,1,1},{0,1,0,1},{1,1,0,0}},
-	{{0,1,1,0},{0,1,0,1},{1,1,0,0}},
-	{{0,1,1,1},{0,1,1,0},{1,1,0,0}},
-	{{0,1,1,1},{0,1,1,1},{1,1,0,0}},
-	{{0,1,1,0},{0,1,1,1},{1,1,0,0}},
-	{{0,1,0,1},{0,1,1,0},{1,1,0,0}}
-									};
+Keyboard_TypeDef keyboard;
+void interruption(){
+	ps2interrupt(&keyboard);
+}
+
 
 //unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
-unsigned char BUFFER[MAX_CARACTERES] = {'A', 'B'};
-unsigned char letterBraille[4];
+unsigned char buffer_char[MAX_CARACTERES] = {'A', 'B'};
+unsigned char buffer_braille[4];
 
 
 /* USER CODE END PV */
@@ -180,7 +150,6 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 /* Private function prototypes -----------------------------------------------*/
 void atualizarEixoX();
 void atualizarEixoY();
-void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter);
 double myABS(double num1);
 
 /* USER CODE END PFP */
@@ -354,38 +323,7 @@ void atualizarEixoY(){
 	  }
 }
 
-/* Para letras: preenche os 2 pontos referentes à linha do caractere informado
- * Para números: preenche os 3 pontos referentes à linha do caractere informado
- * linhaBraille: a linha de um caractere
- * line: a linha que vai ser alocada ou 0, ou 1, ou 2
- * letter: letra recebida do teclado
- */
-void fillLineWithBraille( unsigned char *linhaBraille, unsigned char line, unsigned char letter){
 
-	if(letter>=48 && letter<=57){
-		for(int i=0;i<4;i++){
-			linhaBraille[i]=numerosBraille[letter-48][line][i];
-		}
-	}
-	else{
-		if(letter>=65 && letter<=90){
-			letter+=32;
-		}
-
-		for(int i=0;i<2;i++){
-			if(letter>=97 && letter<=122){
-				linhaBraille[i]=letrasBraille[letter-97][line][i];
-			}
-			if(letter==32){
-				linhaBraille[i]=0;
-			}
-		}
-		linhaBraille[2]='\0';
-		linhaBraille[3]='\0';
-
-
-	}
-}
 /* USER CODE END 0 */
 
 /**
@@ -453,8 +391,9 @@ int main(void)
 	stepStatusOld_2 = 0;
 
 	//memset(linhaBraille, 0, sizeof(linhaBraille));
-	memset(letterBraille, 0, sizeof(letterBraille));
+	memset(buffer_braille, 0, sizeof(buffer_braille));
 
+	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -463,20 +402,28 @@ int main(void)
 	/* USER CODE END WHILE */
 
 	/* USER CODE BEGIN 3 */
-
+	/* Faz a leitura do teclado e envia ao buffer_char */
+	if(keyboardAvailable(&keyboard)){
+		uint8_t c = keyboardRead(&keyboard);
+		if(c == PS2_ENTER){
+			pressedEnter = 1;
+			break;
+		}
+		feedBuffer(buffer_char, MAX_CARACTERES, c);
+	}
 	/* Programa leitura do teclado */
 	if(pressedEnter){
 		for(int j=0;j<3;j++){
 		//Linhas das matrizes
 			for(int i=0;i<MAX_CARACTERES;i++){
 				//Recebe os pontos da linha para o caractere atual
-				fillLineWithBraille(letterBraille, j,BUFFER[i]);
+				fillLineWithBraille(buffer_braille, j,buffer_char[i]);
 
 				//Percorre os 4 bits no máximo para cada caractere
 				for(int x = 0; x < 4; ++x){
-					if(letterBraille[x] == '\0'){
+					if(buffer_braille[x] == '\0'){
 						break;
-					}else if(letterBraille[x] == 1){
+					}else if(buffer_braille[x] == 1){
 						//Furar
 					}
 					setPoint_1 += DELTA_COL_LIN;
@@ -502,6 +449,7 @@ int main(void)
 			pressedEnter = 0;
 		}
 	}
+	clearBuffer(buffer_char);
 
   }
 	/* USER CODE END 3 */
