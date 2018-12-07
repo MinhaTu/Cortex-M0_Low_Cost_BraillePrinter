@@ -43,6 +43,7 @@
 /* USER CODE BEGIN Includes */
 #include "PS2Keyboard.h"
 #include "brailleMatrix.h"
+#include "DCMotors.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -52,72 +53,9 @@ TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-#define SENSOR_1_A_PORT           GPIOF
-#define SENSOR_1_A_PIN            GPIO_PIN_0
-
-#define SENSOR_1_B_PORT           GPIOF
-#define SENSOR_1_B_PIN            GPIO_PIN_1
-
-#define SENSOR_2_A_PORT           GPIOA
-#define SENSOR_2_A_PIN            GPIO_PIN_2
-
-#define SENSOR_2_B_PORT           GPIOA
-#define SENSOR_2_B_PIN            GPIO_PIN_3
-
-#define MOTOR_1_DIRECTION_A_PORT  GPIOA
-#define MOTOR_1_DIRECTION_A_PIN   GPIO_PIN_4
-
-#define MOTOR_1_DIRECTION_B_PORT  GPIOA
-#define MOTOR_1_DIRECTION_B_PIN   GPIO_PIN_6
-
-#define MOTOR_2_DIRECTION_A_PORT  GPIOA
-#define MOTOR_2_DIRECTION_A_PIN   GPIO_PIN_7
-
-#define MOTOR_2_DIRECTION_B_PORT  GPIOB
-#define MOTOR_2_DIRECTION_B_PIN   GPIO_PIN_1
-
-#define MOTOR_3_DIRECTION_A_PORT  GPIOA
-#define MOTOR_3_DIRECTION_A_PIN   GPIO_PIN_9
-
-#define MOTOR_3_DIRECTION_B_PORT  GPIOA
-#define MOTOR_3_DIRECTION_B_PIN   GPIO_PIN_10
-
-#define PS2_DATA_PORT 			  GPIOA
-#define PS2_DATA_PIN			  GPIO_PIN_1
-#define PS2_IQR_PORT			  GPIOA
-#define PS2_IQR_PIN				  GPIO_PIN_0
-
 #define MAX_CARACTERES 2
 #define MAX_LINHAS 27
 
-#define DELTA_COL_LIN 1021
-#define DELTA_CHAR_H 1016
-#define DELTA_CHAR_V 1027
-
-#define MAX_POINT 1096
-
-#define P_FRACTION 1.0     //Proportional factor of control loop 0.001 - 10.0 (1.0)
-#define STEP_MARGIN 10     //10 - 1000 (1)
-
-#define MIN_DUTYCYCLE 100   //0 - 255 (125)
-#define MAX_DUTYCYCLE 127  //0 - 255 (255)
-
-int stepStatusOld_1 = 0;
-int stepStatusOld_2 = 0;
-
-GPIO_PinState sensorStatus_1_A = GPIO_PIN_RESET;
-GPIO_PinState sensorStatus_1_B = GPIO_PIN_RESET;
-
-GPIO_PinState sensorStatus_2_A = GPIO_PIN_RESET;
-GPIO_PinState sensorStatus_2_B = GPIO_PIN_RESET;
-
-int dutyCycle = 0;
-
-signed long setPoint_1 = 0;
-signed long setPoint_2 = 0;
-
-signed long actualPoint_1 = 0;
-signed long actualPoint_2 = 0;
 char pressedEnter = 1;
 char isDone = 0;
 char isEnd = 0;
@@ -149,226 +87,12 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-void atualizarEixoX();
-void atualizarEixoY();
-double myABS(double num1);
+
 
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-double myABS(double num1){
-	if(num1 < 0){
-		num1 += -1;
-	}
 
-	return num1;
-}
-
-void atualizarEixoX(){
-
-	 // Faz a leitura do estado do enconder - 00,01,10,11
-	 sensorStatus_1_A =  HAL_GPIO_ReadPin(SENSOR_1_A_PORT, SENSOR_1_A_PIN);
-	 sensorStatus_1_B =  HAL_GPIO_ReadPin(SENSOR_1_B_PORT, SENSOR_1_B_PIN);
-
-	 // Caso 00: Os dois sensores, A e B, do encoder detectaram uma fita preta
-	  if(sensorStatus_1_A == GPIO_PIN_RESET && sensorStatus_1_B == GPIO_PIN_RESET){
-		  // Se o estado antigo é 3, incrementa a posição atual.
-		  // Se o estado antigo é 1, decrementa a posição atual
-		  if(stepStatusOld_1 == 3){
-			  actualPoint_1++;
-		  }else if(stepStatusOld_1 == 1){
-			  actualPoint_1--;
-		  }
-
-		  //Seta o estado antigo para 0
-		  stepStatusOld_1 = 0;
-	  }
-
-	  // Caso 10: sensor A do enconder, não detecta a fita preta, sensor B do encoder detecta a fita preta
-	  if(sensorStatus_1_A == GPIO_PIN_SET && sensorStatus_1_B == GPIO_PIN_RESET){
-		  // Se o estado antigo é 0, incrementa a posição atual
-		  // Se o estado antigo é 2, decrementa a posição atual
-		  if(stepStatusOld_1 == 0){
-			  actualPoint_1++;
-		  }else if(stepStatusOld_1 == 2){
-			  actualPoint_1--;
-		  }
-
-		  //Seta o estado antigo para 1
-		  stepStatusOld_1 = 1;
-	  }
-
-	  // Caso 11: Os dois sensores, A e B, do encoder não detectaram uma fita preta
-	  if(sensorStatus_1_A == GPIO_PIN_SET && sensorStatus_1_B == GPIO_PIN_SET){
-		  // Se o estado antigo é 1, incrementa a posição atual
-		  // Se o estado antigo é 3, decrementa a posição atual
-		  if(stepStatusOld_1 == 1){
-			  actualPoint_1++;
-		  }else if(stepStatusOld_1 == 3){
-			  actualPoint_1--;
-		  }
-
-		  //Seta o estado antigo para 2
-		  stepStatusOld_1 = 2;
-	  }
-
-	  // Caso 01: sensor A do enconder, detecta a fita preta, sensor B do encoder não detecta a fita preta
-	  if(sensorStatus_1_A == GPIO_PIN_RESET && sensorStatus_1_B == GPIO_PIN_SET){
-		  // Se o estado antigo é 2, incrementa a posição atual
-		  // Se o estado antigo é 3, decrementa a posição atual
-		  if(stepStatusOld_1 == 2){
-			  actualPoint_1++;
-		  }else if(stepStatusOld_1 == 3){
-			  actualPoint_1--;
-		  }
-
-		  //Seta o estado antigo para 3
-		  stepStatusOld_1 = 3;
-	  }
-
-	  // Cálculo PWM - Quando está do destino, diminui a velocidade do motor
-
-	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double)P_FRACTION;
-
-	  if(dutyCycle < MIN_DUTYCYCLE){
-		dutyCycle = MIN_DUTYCYCLE;
-	  }
-	  if(dutyCycle > MAX_DUTYCYCLE){
-		dutyCycle = MAX_DUTYCYCLE;
-	  }
-
-	  if(dutyCycle < MIN_DUTYCYCLE){
-		dutyCycle = MIN_DUTYCYCLE;
-	  }
-	  if(dutyCycle > MAX_DUTYCYCLE){
-		dutyCycle = MAX_DUTYCYCLE;
-	  }
-
-	  // Caso a diferença do ponto atual e o ponto de destino esteja dentro da margem de erro, desabilita o motor
-	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
-			// Desliga o motor pras duas direções
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-			isDone = 1;
-	  }
-	  else{
-		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
-		if(actualPoint_1 < setPoint_1){
-			// Gira em uma direção
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 255 - dutyCycle);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-		}
-
-		// Caso o ponto de destino seja menor que o ponto atual, liga o mtor para a outra direção
-		if(actualPoint_1 > setPoint_1){
-			// Gira na outra direção
-			__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 255 - dutyCycle);
-		}
-	  }
-}
-
-void atualizarEixoY(){
-	 // Faz a leitura do estado do enconder - 00,01,10,11
-	 sensorStatus_2_A =  HAL_GPIO_ReadPin(SENSOR_2_A_PORT, SENSOR_2_A_PIN);
-	 sensorStatus_2_B =  HAL_GPIO_ReadPin(SENSOR_2_B_PORT, SENSOR_2_B_PIN);
-
-	 // Caso 00: Os dois sensores, A e B, do encoder detectaram uma fita preta
-	 if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_RESET){
-		 // Se o estado antigo é 3, incrementa a posição atual.
-		 // Se o estado antigo é 1, decrementa a posição atual
-		 if(stepStatusOld_2 == 3){
-			  actualPoint_2++;
-		  }else if(stepStatusOld_2 == 1){
-			  actualPoint_2--;
-		  }
-
-		 //Seta o estado antigo para 0
-		  stepStatusOld_2 = 0;
-	  }
-
-	 // Caso 10: sensor A do enconder, não detecta a fita preta, sensor B do encoder detecta a fita preta
-	 if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_RESET){
-		 // Se o estado antigo é 0, incrementa a posição atual
-		 // Se o estado antigo é 2, decrementa a posição atual
-
-		if(stepStatusOld_2 == 0){
-		  actualPoint_2++;
-		}else if(stepStatusOld_2 == 2){
-		  actualPoint_2--;
-		}
-
-		//Seta o estado antigo para 1
-		stepStatusOld_2 = 1;
-	  }
-	 // Caso 11: Os dois sensores, A e B, do encoder não detectaram uma fita preta
-	 if(sensorStatus_2_A == GPIO_PIN_SET && sensorStatus_2_B == GPIO_PIN_SET){
-		 // Se o estado antigo é 1, incrementa a posição atual
-		 // Se o estado antigo é 3, decrementa a posição atual
-		 if(stepStatusOld_2 == 1){
-			  actualPoint_2++;
-		  }else if(stepStatusOld_2 == 3){
-			  actualPoint_2--;
-		  }
-
-		 //Seta o estado antigo para 2
-		 stepStatusOld_2 = 2;
-	  }
-
-	 // Caso 01: sensor A do enconder, detecta a fita preta, sensor B do encoder não detecta a fita preta
-	 if(sensorStatus_2_A == GPIO_PIN_RESET && sensorStatus_2_B == GPIO_PIN_SET){
-		 // Se o estado antigo é 2, incrementa a posição atual
-		 // Se o estado antigo é 3, decrementa a posição atual
-		if(stepStatusOld_2 == 2){
-		  actualPoint_2++;
-		}else if(stepStatusOld_2 == 3){
-		  actualPoint_2--;
-		}
-
-		 //Seta o estado antigo para 3
-		 stepStatusOld_2 = 3;
-	  }
-
-	 // Cálculo PWM - Quando está do destino, diminui a velocidade do motor
-	  dutyCycle = myABS((double)(setPoint_1 - actualPoint_1)) * (double) P_FRACTION;
-
-	  if(dutyCycle < MIN_DUTYCYCLE){
-		dutyCycle = MIN_DUTYCYCLE;
-	  }
-	  if(dutyCycle > MAX_DUTYCYCLE){
-		dutyCycle = MAX_DUTYCYCLE;
-	  }
-
-	  if(dutyCycle < MIN_DUTYCYCLE){
-		dutyCycle = MIN_DUTYCYCLE;
-	  }
-	  if(dutyCycle > MAX_DUTYCYCLE){
-		dutyCycle = MAX_DUTYCYCLE;
-	  }
-
-	  // Caso a diferença do ponto atual e o ponto de destino esteja dentro da margem de erro, desabilita o motor
-	  if(myABS((double)(setPoint_1 - actualPoint_1)) < (double)STEP_MARGIN){
-		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
-		isDone = 1;
-	  }
-	  else{
-		// Caso o ponto de destino seja maior que o ponto atual, liga o motor para uma direção
-		if(actualPoint_2 < setPoint_2){
-			// Gira em uma direção
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 255 - dutyCycle);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
-		}
-
-		// Caso o ponto de destino seja menor que o ponto atual, liga o mtor para a outra direção
-		if(actualPoint_2 > setPoint_2){
-			// Gira na outra direção
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-			__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 255 - dutyCycle);
-		}
-	  }
-}
 
 
 /* USER CODE END 0 */
@@ -407,35 +131,7 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
-
-  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
-
-  HAL_TIM_PWM_Start(&htim14, TIM_CHANNEL_1);
-
-  /* Motor 1 - x*/
-	__HAL_TIM_SET_COMPARE(&htim14, TIM_CHANNEL_1, 0);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 0);
-
-	/* Motor 2 */
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_2, 0);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_4, 0);
-
-	/* Motor 3 */
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, 0);
-
-	sensorStatus_1_A =  HAL_GPIO_ReadPin(SENSOR_1_A_PORT, SENSOR_1_A_PIN);
-	sensorStatus_1_B =  HAL_GPIO_ReadPin(SENSOR_1_B_PORT, SENSOR_1_B_PIN);
-
-	sensorStatus_2_A =  HAL_GPIO_ReadPin(SENSOR_2_A_PORT, SENSOR_2_A_PIN);
-	sensorStatus_2_B =  HAL_GPIO_ReadPin(SENSOR_2_B_PORT, SENSOR_2_B_PIN);
-
-	stepStatusOld_1 = 0;
-	stepStatusOld_2 = 0;
+  	initMotors();
 
 	//memset(linhaBraille, 0, sizeof(linhaBraille));
 	memset(buffer_braille, 0, sizeof(buffer_braille));

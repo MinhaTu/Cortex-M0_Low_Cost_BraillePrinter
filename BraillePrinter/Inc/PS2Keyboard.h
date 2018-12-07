@@ -8,8 +8,6 @@
 #ifndef PS2KEYBOARD_H_
 #define PS2KEYBOARD_H_
 
-
-
 #include "stm32f0xx_hal.h"
 #include "pgmspace.h"
 // Every call to read() returns a single byte for each
@@ -140,6 +138,11 @@
 #define PS2_thorn			254 // þ
 #define PS2_y_DIAERESIS			255 // ÿ
 
+
+#define PS2_DATA_PORT 			  GPIOA
+#define PS2_DATA_PIN			  GPIO_PIN_1
+#define PS2_IQR_PORT			  GPIOA
+#define PS2_IQR_PIN				  GPIO_PIN_0
 
 #define PS2_KEYMAP_SIZE 136
 
