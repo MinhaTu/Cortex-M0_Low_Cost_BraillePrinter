@@ -11,18 +11,6 @@
 #include "DCMotors.h"
 #include "stm32f0xx_hal.h"
 
-#define SENSOR_1_A_PORT           GPIOF
-#define SENSOR_1_A_PIN            GPIO_PIN_0
-
-#define SENSOR_1_B_PORT           GPIOF
-#define SENSOR_1_B_PIN            GPIO_PIN_1
-
-#define SENSOR_2_A_PORT           GPIOA
-#define SENSOR_2_A_PIN            GPIO_PIN_2
-
-#define SENSOR_2_B_PORT           GPIOA
-#define SENSOR_2_B_PIN            GPIO_PIN_3
-
 #define DELTA_COL_LIN 1021
 #define DELTA_CHAR_H 1016
 #define DELTA_CHAR_V 1027
@@ -35,26 +23,29 @@
 #define MIN_DUTYCYCLE 100   //0 - 255 (125)
 #define MAX_DUTYCYCLE 127  //0 - 255 (255)
 
-int dutyCycle;
 
-signed long setPoint_1;
-signed long setPoint_2;
+typedef struct{
+	signed long setPoint;
+	signed long actualPoint;
+	uint8_t stepStatusOld;
 
-signed long actualPoint_1;
-signed long actualPoint_2;
+	GPIO_TypeDef* encoderA_port;
+	uint16_t encoderA_pin;
 
-int stepStatusOld_1;
-int stepStatusOld_2;
+	GPIO_TypeDef* encoderB_port;
+	uint16_t encoderB_pin;
 
-GPIO_PinState sensorStatus_1_A;
-GPIO_PinState sensorStatus_1_B;
+	TIM_HandleTypeDef timer_left;
+	TIM_HandleTypeDef timer_right;
 
-GPIO_PinState sensorStatus_2_A;
-GPIO_PinState sensorStatus_2_B;
+	uint16_t channel_left;
+	uint16_t channel_right;
 
-void initMotors();
-void atualizarEixoX();
-void atualizarEixoY();
+	uint8_t dutyCycle;
+}MotorControl_t;
+
+void initMotor(MotorControl_t* motor, GPIO_TypeDef* encoderA_port, uint16_t encoderA_pin, GPIO_TypeDef* encoderB_port, uint16_t encoderB_pin, TIM_HandleTypeDef timer_left, TIM_HandleTypeDef timer_right, uint16_t channel_left, uint16_t channel_right);
+void atualizarEixo(MotorControl_t* motor,signed long setPoint);
 double myABS(double num1);
 
 #endif /* DCMOTORS_H_ */
