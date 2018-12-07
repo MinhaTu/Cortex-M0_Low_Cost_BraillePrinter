@@ -64,6 +64,11 @@
 #define ENCODER_2_B_PORT           GPIOA
 #define ENCODER_2_B_PIN            GPIO_PIN_3
 
+#define MOTORZ_A_PORT			   GPIOA
+#define MOTORZ_A_PIN			   GPIO_PIN_9
+
+#define MOTORZ_B_PORT			   GPIOA
+#define MOTORZ_B_PIN			   GPIO_PIN_10
 
 #define MAX_CARACTERES 2
 #define MAX_LINHAS 27
@@ -78,9 +83,9 @@ Keyboard_TypeDef keyboard;
 MotorControl_t motorX;
 MotorControl_t motorY;
 
-
+MotorControl_Simple_t motorZ;
 //unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
-unsigned char buffer_char[MAX_CARACTERES] = {'A', 'B'};
+unsigned char buffer_char[MAX_CARACTERES];
 unsigned char buffer_braille[4];
 
 
@@ -137,12 +142,15 @@ int main(void)
 	MX_TIM1_Init();
 
 	/* USER CODE BEGIN 2 */
-	initMotor(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
-	initMotor(&motorY, ENCODER_2_A_PORT, ENCODER_2_A_PIN, ENCODER_2_B_PORT, ENCODER_2_B_PIN, htim3, htim3, TIM_CHANNEL_2,  TIM_CHANNEL_4);
+	motorBegin(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
+	motorBegin(&motorY, ENCODER_2_A_PORT, ENCODER_2_A_PIN, ENCODER_2_B_PORT, ENCODER_2_B_PIN, htim3, htim3, TIM_CHANNEL_2,  TIM_CHANNEL_4);
+
+	motorSimpleBegin(&motorZ, MOTORZ_A_PORT, MOTORZ_A_PIN, MOTORZ_B_PORT, MOTORZ_B_PIN);
+
+	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
 
 	memset(buffer_braille, 0, sizeof(buffer_braille));
 
-	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -164,10 +172,10 @@ int main(void)
 		if(pressedEnter){
 
 			for(int j=0;j<3;j++){
-
+				//Imprime as linhas em braille
 				if(j==1){
 					//Linhas das matrizes
-					for(int i=strlen(buffer_char)-1; i>=0; --i){
+					for(unsigned short i=strlen((const char*)buffer_char)-1; i>=0; --i){
 
 						// Recebe os pontos da linha para o caractere atual
 						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
@@ -196,7 +204,7 @@ int main(void)
 				}else{
 
 					//Linhas das matrizes
-					for(int i=0; i<strlen(buffer_char); i++){
+					for(unsigned short i=0; i<strlen((const char*)buffer_char); i++){
 
 						//Recebe os pontos da linha para o caractere atual
 						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
@@ -207,7 +215,8 @@ int main(void)
 							if(buffer_braille[x] == '\0'){
 								break;
 							}else if(buffer_braille[x] == 1){
-								//Furar
+								motorForward(&motorZ, PIERCE_TIME);
+								motorBackward(&motorZ, PIERCE_TIME);
 							}
 
 							// Incrementa posição do eixo x, espaçamento entre colunas

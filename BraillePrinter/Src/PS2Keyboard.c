@@ -161,8 +161,8 @@ static char get_iso8859_code(Keyboard_TypeDef* keyboard)
 				if (s < PS2_KEYMAP_SIZE)
 					c = pgm_read_byte(keyboard->keymap->altgr + s); // MUDAR
 			} else if (state & (SHIFT_L | SHIFT_R)) {
-				if (s < PS2_KEYMAP_SIZE)
-					c = pgm_read_byte(keyboard->keymap->shift + s);
+//				if (s < PS2_KEYMAP_SIZE)
+				//	c = pgm_read_byte(keyboard->keymap->shift + s);
 			} else {
 				if (s < PS2_KEYMAP_SIZE)
 					c = pgm_read_byte(keyboard->keymap->noshift + s);

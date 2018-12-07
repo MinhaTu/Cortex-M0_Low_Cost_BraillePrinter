@@ -36,7 +36,7 @@
 #include "stm32f0xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "PS2Keyboard.h"
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/

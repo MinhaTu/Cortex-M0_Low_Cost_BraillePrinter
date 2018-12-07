@@ -41,7 +41,7 @@ void fillLineWithBraille( unsigned char *lineBraille, unsigned char line, unsign
  * Adiciona caracteres a uma string
  */
 void feedBuffer(unsigned char* buffer, short SIZE, unsigned char c){
-    short len = strlen(buffer);
+    unsigned short len = strlen((const char*)buffer);
     if(len != (SIZE-1)){
         buffer[len] = c;
         buffer[len+1] = '\0';
