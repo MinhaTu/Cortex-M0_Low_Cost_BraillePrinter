@@ -70,7 +70,7 @@
 #define MOTORZ_B_PORT			   GPIOA
 #define MOTORZ_B_PIN			   GPIO_PIN_10
 
-#define MAX_CARACTERES 50
+#define MAX_CARACTERES 5
 #define MAX_LINHAS 27
 #define POS_INI 0
 #define POS_FIM 4000
@@ -162,16 +162,17 @@ int main(void)
 		/* Faz a leitura do teclado e envia ao buffer_char */
 		while(1){
 			if(keyboardAvailable(&keyboard)){
-						uint8_t c = keyboardRead(&keyboard);
-						if(c == PS2_ENTER){
-							pressedEnter = 1;
-				  	  			break;
-						}
-		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-		  	  			HAL_Delay(100);
-		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-						feedBuffer(buffer_char, MAX_CARACTERES, c);
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+				HAL_Delay(50);
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+				uint8_t c = keyboardRead(&keyboard);
+				if(c == PS2_ENTER){
+					pressedEnter = 1;
+				  	  	break;
 					}
+
+				feedBuffer(buffer_char, MAX_CARACTERES, c);
+			}
 		}
 
 		/* Programa leitura do teclado */
@@ -251,6 +252,7 @@ int main(void)
 
 	}
   /* USER CODE END 3 */
+
 }
 
 /**

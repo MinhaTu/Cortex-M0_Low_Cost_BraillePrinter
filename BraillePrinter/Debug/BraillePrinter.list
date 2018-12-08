@@ -15,9 +15,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   5 .data         00000128  20000000  08003e14  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .bss          000002bc  20000128  08003f3c  00020128  2**2
+  6 .bss          00000290  20000128  08003f3c  00020128  2**2
                   ALLOC
-  7 ._user_heap_stack 00000600  200003e4  08003f3c  000203e4  2**0
+  7 ._user_heap_stack 00000600  200003b8  08003f3c  000203b8  2**0
                   ALLOC
   8 .ARM.attributes 00000028  00000000  00000000  00020128  2**0
                   CONTENTS, READONLY
@@ -29,13 +29,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_ranges 00000868  00000000  00000000  00032328  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00004787  00000000  00000000  00032b90  2**0
+ 13 .debug_line   00004783  00000000  00000000  00032b90  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00002bce  00000000  00000000  00037317  2**0
+ 14 .debug_str    00002bce  00000000  00000000  00037313  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .comment      0000007c  00000000  00000000  00039ee5  2**0
+ 15 .comment      0000007c  00000000  00000000  00039ee1  2**0
                   CONTENTS, READONLY
- 16 .debug_frame  00002140  00000000  00000000  00039f64  2**2
+ 16 .debug_frame  00002140  00000000  00000000  00039f60  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -7954,7 +7954,7 @@ void MX_GPIO_Init(void)
  8003040:	683b      	ldr	r3, [r7, #0]
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
  8003042:	2390      	movs	r3, #144	; 0x90
  8003044:	05db      	lsls	r3, r3, #23
  8003046:	2200      	movs	r2, #0
@@ -7987,7 +7987,7 @@ void MX_GPIO_Init(void)
  8003072:	f7fd ff49 	bl	8000f08 <HAL_GPIO_Init>
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = DATA___Keyboard_Pin;
+  GPIO_InitStruct.Pin = CLK__Keyboard_Pin;
  8003076:	230c      	movs	r3, #12
  8003078:	18fb      	adds	r3, r7, r3
  800307a:	2201      	movs	r2, #1
@@ -8002,7 +8002,7 @@ void MX_GPIO_Init(void)
  8003088:	18fb      	adds	r3, r7, r3
  800308a:	2201      	movs	r2, #1
  800308c:	609a      	str	r2, [r3, #8]
-  HAL_GPIO_Init(DATA___Keyboard_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(CLK__Keyboard_GPIO_Port, &GPIO_InitStruct);
  800308e:	230c      	movs	r3, #12
  8003090:	18fa      	adds	r2, r7, r3
  8003092:	2390      	movs	r3, #144	; 0x90
@@ -8012,7 +8012,7 @@ void MX_GPIO_Init(void)
  800309a:	f7fd ff35 	bl	8000f08 <HAL_GPIO_Init>
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = CLK___Keyboard_Pin;
+  GPIO_InitStruct.Pin = DATA___Keyboard_Pin;
  800309e:	230c      	movs	r3, #12
  80030a0:	18fb      	adds	r3, r7, r3
  80030a2:	2202      	movs	r2, #2
@@ -8027,7 +8027,7 @@ void MX_GPIO_Init(void)
  80030b0:	18fb      	adds	r3, r7, r3
  80030b2:	2201      	movs	r2, #1
  80030b4:	609a      	str	r2, [r3, #8]
-  HAL_GPIO_Init(CLK___Keyboard_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(DATA___Keyboard_GPIO_Port, &GPIO_InitStruct);
  80030b6:	230c      	movs	r3, #12
  80030b8:	18fa      	adds	r2, r7, r3
  80030ba:	2390      	movs	r3, #144	; 0x90
@@ -8061,8 +8061,8 @@ void MX_GPIO_Init(void)
  80030e8:	0018      	movs	r0, r3
  80030ea:	f7fd ff0d 	bl	8000f08 <HAL_GPIO_Init>
 
-  /*Configure GPIO pin : PA5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
+  /*Configure GPIO pin : PtPin */
+  GPIO_InitStruct.Pin = LED_Pin;
  80030ee:	230c      	movs	r3, #12
  80030f0:	18fb      	adds	r3, r7, r3
  80030f2:	2220      	movs	r2, #32
@@ -8082,7 +8082,7 @@ void MX_GPIO_Init(void)
  8003108:	18fb      	adds	r3, r7, r3
  800310a:	2200      	movs	r2, #0
  800310c:	60da      	str	r2, [r3, #12]
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
  800310e:	230c      	movs	r3, #12
  8003110:	18fa      	adds	r2, r7, r3
  8003112:	2390      	movs	r3, #144	; 0x90
@@ -8277,58 +8277,58 @@ int main(void)
  8003242:	f7ff fd63 	bl	8002d0c <keyboardAvailable>
  8003246:	1e03      	subs	r3, r0, #0
  8003248:	d0f9      	beq.n	800323e <main+0xe2>
-						uint8_t c = keyboardRead(&keyboard);
- 800324a:	1cfc      	adds	r4, r7, #3
- 800324c:	4b7c      	ldr	r3, [pc, #496]	; (8003440 <main+0x2e4>)
- 800324e:	0018      	movs	r0, r3
- 8003250:	f7ff fd81 	bl	8002d56 <keyboardRead>
- 8003254:	0003      	movs	r3, r0
- 8003256:	7023      	strb	r3, [r4, #0]
-						if(c == PS2_ENTER){
- 8003258:	1cfb      	adds	r3, r7, #3
- 800325a:	781b      	ldrb	r3, [r3, #0]
- 800325c:	2b0d      	cmp	r3, #13
- 800325e:	d109      	bne.n	8003274 <main+0x118>
-							pressedEnter = 1;
- 8003260:	4b79      	ldr	r3, [pc, #484]	; (8003448 <main+0x2ec>)
- 8003262:	2201      	movs	r2, #1
- 8003264:	701a      	strb	r2, [r3, #0]
-				  	  			break;
- 8003266:	46c0      	nop			; (mov r8, r8)
-						feedBuffer(buffer_char, MAX_CARACTERES, c);
-					}
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+ 800324a:	2390      	movs	r3, #144	; 0x90
+ 800324c:	05db      	lsls	r3, r3, #23
+ 800324e:	2201      	movs	r2, #1
+ 8003250:	2120      	movs	r1, #32
+ 8003252:	0018      	movs	r0, r3
+ 8003254:	f7fd ffe9 	bl	800122a <HAL_GPIO_WritePin>
+				HAL_Delay(50);
+ 8003258:	2032      	movs	r0, #50	; 0x32
+ 800325a:	f7fd fd35 	bl	8000cc8 <HAL_Delay>
+				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+ 800325e:	2390      	movs	r3, #144	; 0x90
+ 8003260:	05db      	lsls	r3, r3, #23
+ 8003262:	2200      	movs	r2, #0
+ 8003264:	2120      	movs	r1, #32
+ 8003266:	0018      	movs	r0, r3
+ 8003268:	f7fd ffdf 	bl	800122a <HAL_GPIO_WritePin>
+				uint8_t c = keyboardRead(&keyboard);
+ 800326c:	1cfc      	adds	r4, r7, #3
+ 800326e:	4b74      	ldr	r3, [pc, #464]	; (8003440 <main+0x2e4>)
+ 8003270:	0018      	movs	r0, r3
+ 8003272:	f7ff fd70 	bl	8002d56 <keyboardRead>
+ 8003276:	0003      	movs	r3, r0
+ 8003278:	7023      	strb	r3, [r4, #0]
+				if(c == PS2_ENTER){
+ 800327a:	1cfb      	adds	r3, r7, #3
+ 800327c:	781b      	ldrb	r3, [r3, #0]
+ 800327e:	2b0d      	cmp	r3, #13
+ 8003280:	d109      	bne.n	8003296 <main+0x13a>
+					pressedEnter = 1;
+ 8003282:	4b71      	ldr	r3, [pc, #452]	; (8003448 <main+0x2ec>)
+ 8003284:	2201      	movs	r2, #1
+ 8003286:	701a      	strb	r2, [r3, #0]
+				  	  	break;
+ 8003288:	46c0      	nop			; (mov r8, r8)
+				feedBuffer(buffer_char, MAX_CARACTERES, c);
+			}
 		}
 
 		/* Programa leitura do teclado */
 		if(pressedEnter){
- 8003268:	4b77      	ldr	r3, [pc, #476]	; (8003448 <main+0x2ec>)
- 800326a:	781b      	ldrb	r3, [r3, #0]
- 800326c:	2b00      	cmp	r3, #0
- 800326e:	d100      	bne.n	8003272 <main+0x116>
- 8003270:	e0d4      	b.n	800341c <main+0x2c0>
- 8003272:	e018      	b.n	80032a6 <main+0x14a>
-		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
- 8003274:	2390      	movs	r3, #144	; 0x90
- 8003276:	05db      	lsls	r3, r3, #23
- 8003278:	2201      	movs	r2, #1
- 800327a:	2120      	movs	r1, #32
- 800327c:	0018      	movs	r0, r3
- 800327e:	f7fd ffd4 	bl	800122a <HAL_GPIO_WritePin>
-		  	  			HAL_Delay(100);
- 8003282:	2064      	movs	r0, #100	; 0x64
- 8003284:	f7fd fd20 	bl	8000cc8 <HAL_Delay>
-		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
- 8003288:	2390      	movs	r3, #144	; 0x90
- 800328a:	05db      	lsls	r3, r3, #23
- 800328c:	2200      	movs	r2, #0
- 800328e:	2120      	movs	r1, #32
- 8003290:	0018      	movs	r0, r3
- 8003292:	f7fd ffca 	bl	800122a <HAL_GPIO_WritePin>
-						feedBuffer(buffer_char, MAX_CARACTERES, c);
+ 800328a:	4b6f      	ldr	r3, [pc, #444]	; (8003448 <main+0x2ec>)
+ 800328c:	781b      	ldrb	r3, [r3, #0]
+ 800328e:	2b00      	cmp	r3, #0
+ 8003290:	d100      	bne.n	8003294 <main+0x138>
+ 8003292:	e0c3      	b.n	800341c <main+0x2c0>
+ 8003294:	e007      	b.n	80032a6 <main+0x14a>
+				feedBuffer(buffer_char, MAX_CARACTERES, c);
  8003296:	1cfb      	adds	r3, r7, #3
  8003298:	781a      	ldrb	r2, [r3, #0]
  800329a:	4b6c      	ldr	r3, [pc, #432]	; (800344c <main+0x2f0>)
- 800329c:	2132      	movs	r1, #50	; 0x32
+ 800329c:	2105      	movs	r1, #5
  800329e:	0018      	movs	r0, r3
  80032a0:	f7ff fe66 	bl	8002f70 <feedBuffer>
 			if(keyboardAvailable(&keyboard)){
@@ -8590,13 +8590,13 @@ int main(void)
  8003424:	e70b      	b.n	800323e <main+0xe2>
  8003426:	46c0      	nop			; (mov r8, r8)
  8003428:	48001400 	.word	0x48001400
- 800342c:	200001d8 	.word	0x200001d8
- 8003430:	20000324 	.word	0x20000324
- 8003434:	200003a4 	.word	0x200003a4
- 8003438:	20000280 	.word	0x20000280
- 800343c:	200001c8 	.word	0x200001c8
+ 800342c:	200001ac 	.word	0x200001ac
+ 8003430:	200002f8 	.word	0x200002f8
+ 8003434:	20000378 	.word	0x20000378
+ 8003438:	20000254 	.word	0x20000254
+ 800343c:	2000019c 	.word	0x2000019c
  8003440:	20000150 	.word	0x20000150
- 8003444:	2000027c 	.word	0x2000027c
+ 8003444:	20000250 	.word	0x20000250
  8003448:	20000120 	.word	0x20000120
  800344c:	20000194 	.word	0x20000194
  8003450:	fffffc03 	.word	0xfffffc03
@@ -8647,7 +8647,7 @@ void SystemClock_Config(void)
  800348e:	d006      	beq.n	800349e <SystemClock_Config+0x42>
   {
     _Error_Handler(__FILE__, __LINE__);
- 8003490:	2389      	movs	r3, #137	; 0x89
+ 8003490:	238a      	movs	r3, #138	; 0x8a
  8003492:	005a      	lsls	r2, r3, #1
  8003494:	4b1c      	ldr	r3, [pc, #112]	; (8003508 <SystemClock_Config+0xac>)
  8003496:	0011      	movs	r1, r2
@@ -8684,7 +8684,7 @@ void SystemClock_Config(void)
  80034c2:	d007      	beq.n	80034d4 <SystemClock_Config+0x78>
   {
     _Error_Handler(__FILE__, __LINE__);
- 80034c4:	2320      	movs	r3, #32
+ 80034c4:	2322      	movs	r3, #34	; 0x22
  80034c6:	33ff      	adds	r3, #255	; 0xff
  80034c8:	001a      	movs	r2, r3
  80034ca:	4b0f      	ldr	r3, [pc, #60]	; (8003508 <SystemClock_Config+0xac>)
@@ -9260,7 +9260,7 @@ void MX_TIM1_Init(void)
  800378e:	46bd      	mov	sp, r7
  8003790:	b010      	add	sp, #64	; 0x40
  8003792:	bd80      	pop	{r7, pc}
- 8003794:	20000364 	.word	0x20000364
+ 8003794:	20000338 	.word	0x20000338
  8003798:	40012c00 	.word	0x40012c00
  800379c:	08003c08 	.word	0x08003c08
 
@@ -9414,7 +9414,7 @@ void MX_TIM3_Init(void)
  800387e:	b00a      	add	sp, #40	; 0x28
  8003880:	bd80      	pop	{r7, pc}
  8003882:	46c0      	nop			; (mov r8, r8)
- 8003884:	20000324 	.word	0x20000324
+ 8003884:	200002f8 	.word	0x200002f8
  8003888:	40000400 	.word	0x40000400
  800388c:	08003c08 	.word	0x08003c08
 
@@ -9521,7 +9521,7 @@ void MX_TIM14_Init(void)
  8003922:	46bd      	mov	sp, r7
  8003924:	b008      	add	sp, #32
  8003926:	bd80      	pop	{r7, pc}
- 8003928:	200003a4 	.word	0x200003a4
+ 8003928:	20000378 	.word	0x20000378
  800392c:	40002000 	.word	0x40002000
  8003930:	08003c08 	.word	0x08003c08
 
@@ -9923,7 +9923,7 @@ LoopForever:
   ldr r2, =_sbss
  8003b48:	20000128 	.word	0x20000128
   ldr r4, =_ebss
- 8003b4c:	200003e4 	.word	0x200003e4
+ 8003b4c:	200003b8 	.word	0x200003b8
 
 08003b50 <ADC1_IRQHandler>:
  * @retval : None

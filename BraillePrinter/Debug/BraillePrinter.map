@@ -35,7 +35,7 @@ Allocating common symbols
 Common symbol       size              file
 
 keyboard            0x44              Src/main.o
-buffer_char         0x32              Src/main.o
+buffer_char         0x5               Src/main.o
 uwTick              0x4               Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
 motorZ              0x10              Src/main.o
 pFlash              0x20              Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.o
@@ -1333,7 +1333,7 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-
  .igot.plt      0x0000000020000128        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 0x0000000020000128                . = ALIGN (0x4)
 
-.bss            0x0000000020000128      0x2bc load address 0x0000000008003f3c
+.bss            0x0000000020000128      0x290 load address 0x0000000008003f3c
                 0x0000000020000128                _sbss = .
                 0x0000000020000128                __bss_start__ = _sbss
  *(.bss)
@@ -1351,31 +1351,31 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.1.0/ARMTools/bin/../lib/gcc/arm-
  *fill*         0x000000002000014b        0x1 
  COMMON         0x000000002000014c        0x4 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
                 0x000000002000014c                uwTick
- COMMON         0x0000000020000150      0x1d4 Src/main.o
+ COMMON         0x0000000020000150      0x1a8 Src/main.o
                 0x0000000020000150                keyboard
                 0x0000000020000194                buffer_char
-                0x00000000200001c8                motorZ
-                0x00000000200001d8                motorX
-                0x000000002000027c                buffer_braille
-                0x0000000020000280                motorY
- COMMON         0x0000000020000324       0xc0 Src/tim.o
-                0x0000000020000324                htim3
-                0x0000000020000364                htim1
-                0x00000000200003a4                htim14
-                0x00000000200003e4                . = ALIGN (0x4)
-                0x00000000200003e4                _ebss = .
-                0x00000000200003e4                __bss_end__ = _ebss
+                0x000000002000019c                motorZ
+                0x00000000200001ac                motorX
+                0x0000000020000250                buffer_braille
+                0x0000000020000254                motorY
+ COMMON         0x00000000200002f8       0xc0 Src/tim.o
+                0x00000000200002f8                htim3
+                0x0000000020000338                htim1
+                0x0000000020000378                htim14
+                0x00000000200003b8                . = ALIGN (0x4)
+                0x00000000200003b8                _ebss = .
+                0x00000000200003b8                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x00000000200003e4      0x600 load address 0x0000000008003f3c
-                0x00000000200003e4                . = ALIGN (0x4)
+                0x00000000200003b8      0x600 load address 0x0000000008003f3c
+                0x00000000200003b8                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (end, .)
                 [!provide]                        PROVIDE (_end, .)
-                0x00000000200005e4                . = (. + _Min_Heap_Size)
- *fill*         0x00000000200003e4      0x200 
-                0x00000000200009e4                . = (. + _Min_Stack_Size)
- *fill*         0x00000000200005e4      0x400 
-                0x00000000200009e4                . = ALIGN (0x4)
+                0x00000000200005b8                . = (. + _Min_Heap_Size)
+ *fill*         0x00000000200003b8      0x200 
+                0x00000000200009b8                . = (. + _Min_Stack_Size)
+ *fill*         0x00000000200005b8      0x400 
+                0x00000000200009b8                . = ALIGN (0x4)
 
 /DISCARD/
  libc.a(*)
@@ -1543,7 +1543,7 @@ OUTPUT(BraillePrinter.elf elf32-littlearm)
  .debug_ranges  0x0000000000000800       0x48 Src/tim.o
  .debug_ranges  0x0000000000000848       0x20 startup/startup_stm32f030x6.o
 
-.debug_line     0x0000000000000000     0x4787
+.debug_line     0x0000000000000000     0x4783
  .debug_line    0x0000000000000000      0x3e2 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .debug_line    0x00000000000003e2      0x408 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
  .debug_line    0x00000000000007ea      0x3e8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o
@@ -1554,12 +1554,12 @@ OUTPUT(BraillePrinter.elf elf32-littlearm)
  .debug_line    0x0000000000003169      0x368 Src/PS2Keyboard.o
  .debug_line    0x00000000000034d1      0x24c Src/brailleMatrix.o
  .debug_line    0x000000000000371d      0x244 Src/gpio.o
- .debug_line    0x0000000000003961      0x384 Src/main.o
- .debug_line    0x0000000000003ce5      0x1ff Src/stm32f0xx_hal_msp.o
- .debug_line    0x0000000000003ee4      0x259 Src/stm32f0xx_it.o
- .debug_line    0x000000000000413d      0x22e Src/system_stm32f0xx.o
- .debug_line    0x000000000000436b      0x399 Src/tim.o
- .debug_line    0x0000000000004704       0x83 startup/startup_stm32f030x6.o
+ .debug_line    0x0000000000003961      0x380 Src/main.o
+ .debug_line    0x0000000000003ce1      0x1ff Src/stm32f0xx_hal_msp.o
+ .debug_line    0x0000000000003ee0      0x259 Src/stm32f0xx_it.o
+ .debug_line    0x0000000000004139      0x22e Src/system_stm32f0xx.o
+ .debug_line    0x0000000000004367      0x399 Src/tim.o
+ .debug_line    0x0000000000004700       0x83 startup/startup_stm32f030x6.o
 
 .debug_str      0x0000000000000000     0x2bce
  .debug_str     0x0000000000000000      0x946 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
