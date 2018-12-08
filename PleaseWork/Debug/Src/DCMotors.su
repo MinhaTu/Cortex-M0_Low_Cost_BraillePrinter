@@ -1,0 +1,6 @@
+DCMotors.c:5:6:motorBegin	24	static
+DCMotors.c:32:8:myABS	24	static
+DCMotors.c:41:6:atualizarEixo	24	static
+DCMotors.c:91:6:motorSimpleBegin	24	static
+DCMotors.c:99:6:motorForward	16	static
+DCMotors.c:109:7:motorBackward	16	static
