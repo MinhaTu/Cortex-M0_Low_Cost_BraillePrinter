@@ -41,8 +41,6 @@ void ps2interrupt(Keyboard_TypeDef* keyboard)
 		bitcount = 0;
 		incoming = 0;
 	}
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 }
 
 static inline uint8_t get_scan_code(Keyboard_TypeDef* keyboard)

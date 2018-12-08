@@ -1,3 +1,6 @@
-DCMotors.c:5:6:initMotor	24	static
+DCMotors.c:5:6:motorBegin	24	static
 DCMotors.c:33:8:myABS	24	static
 DCMotors.c:42:6:atualizarEixo	32	static
+DCMotors.c:158:6:motorSimpleBegin	24	static
+DCMotors.c:166:6:motorForward	16	static
+DCMotors.c:176:7:motorBackward	16	static
