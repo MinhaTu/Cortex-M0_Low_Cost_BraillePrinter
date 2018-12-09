@@ -70,7 +70,7 @@
 #define MOTORZ_B_PORT			   GPIOA
 #define MOTORZ_B_PIN			   GPIO_PIN_10
 
-#define MAX_CARACTERES 5
+#define MAX_CARACTERES 256
 #define MAX_LINHAS 27
 #define POS_INI 0
 #define POS_FIM 4000
@@ -148,7 +148,7 @@ int main(void)
 
 	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
 
-	memset(buffer_braille, 0, sizeof(buffer_braille));
+	//memset(buffer_braille, 0, sizeof(buffer_braille));
 
   /* USER CODE END 2 */
 
@@ -178,7 +178,7 @@ int main(void)
 
 		/* Programa leitura do teclado */
 		if(pressedEnter){
-
+			reverse(buffer_char);
 			for(int j=0;j<3;j++){
 				//Imprime as linhas em braille
 				if(j==1){
@@ -189,10 +189,11 @@ int main(void)
 						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
 
 						// Percorre os 4 bits, no máximo, para cada caractere
-						for(int x = 3; x >=0; ++x){
+						for(int x = 3; x >=0; --x){
 
 							// Passa para a próxima iteração se o não tem ponto para furar
 							if(buffer_braille[x] == '\0'){
+								en_updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
 								continue;
 							}else if(buffer_braille[x] == 1){
 								motorForward(&motorZ, PIERCE_TIME);
@@ -200,16 +201,16 @@ int main(void)
 							}
 
 							// Decrementa posição do eixo x, espaçamento entre colunas
-							atualizarEixo(&motorX, motorX.setPoint - DELTA_COL_LIN);
+							en_updateAxis(&motorX, motorX.setPoint - DELTA_COL_LIN);
 						}
 
 						// Decrementa posição do eixo x, espaçamento entre char na horizontal
-						atualizarEixo(&motorX, motorX.setPoint - DELTA_CHAR_H);
+						en_updateAxis(&motorX, motorX.setPoint - DELTA_CHAR_H);
 
 					}
 
 					// Decrementa posição do eixo y, espaçamento entre linhas
-					atualizarEixo(&motorY, motorY.setPoint + DELTA_COL_LIN);
+					en_updateAxis(&motorY, motorY.setPoint + DELTA_COL_LIN);
 				}else{
 					unsigned short i;
 					//Linhas das matrizes
@@ -222,6 +223,7 @@ int main(void)
 						for(int x = 0; x < 4; ++x){
 
 							if(buffer_braille[x] == '\0'){
+								en_updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
 								break;
 							}else if(buffer_braille[x] == 1){
 								motorForward(&motorZ, PIERCE_TIME);
@@ -229,24 +231,24 @@ int main(void)
 							}
 
 							// Incrementa posição do eixo x, espaçamento entre colunas
-							atualizarEixo(&motorX, motorX.setPoint + DELTA_COL_LIN);
+							en_updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
 						}
 
 						// Incrementa posição do eixo x, espaçamento entre char na horizontal
-						atualizarEixo(&motorX, motorX.setPoint + DELTA_CHAR_H);
+						en_updateAxis(&motorX, motorX.setPoint + DELTA_CHAR_H);
 
 					}
 
 					// Incrementa posição do eixo y, espaçamento entre linhas
-					atualizarEixo(&motorY, motorY.setPoint + DELTA_COL_LIN);
+					en_updateAxis(&motorY, motorY.setPoint + DELTA_COL_LIN);
 				}
 			}
 
 			// Incrementa posição do eixo y, espaçamento entre char na vertical
-			atualizarEixo(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
+			en_updateAxis(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
 
 			// Seta posição eixo x para inicial
-			atualizarEixo(&motorX, POS_INI);
+			en_updateAxis(&motorX, POS_INI);
 
 			pressedEnter = 0;
 		}

@@ -1,0 +1,3 @@
+brailleMatrix.c:55:6:fillLineWithBraille	32	static
+brailleMatrix.c:85:6:feedBuffer	24	static
+brailleMatrix.c:96:6:clearBuffer	16	static

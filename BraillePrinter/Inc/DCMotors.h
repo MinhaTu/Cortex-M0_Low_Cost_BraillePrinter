@@ -54,7 +54,7 @@ typedef struct{
 }MotorControl_Simple_t;
 
 void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoderA_port, uint16_t encoderA_pin, GPIO_TypeDef* encoderB_port, uint16_t encoderB_pin, TIM_HandleTypeDef timer_left, TIM_HandleTypeDef timer_right, uint16_t channel_left, uint16_t channel_right);
-void atualizarEixo(MotorControl_t* motor,signed long setPoint);
+void en_updateAxis(MotorControl_t* motor,signed long setPoint);
 void motorBackward(MotorControl_Simple_t* motor, uint32_t time);
 void motorForward(MotorControl_Simple_t* motor, uint32_t time);
 void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin);

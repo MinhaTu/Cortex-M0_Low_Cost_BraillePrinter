@@ -39,7 +39,7 @@ double myABS(double num1){
 }
 
 
-void atualizarEixo(MotorControl_t* motor,signed long setPoint){
+void en_updateAxis(MotorControl_t* motor,signed long setPoint){
 	GPIO_PinState encoderA_status;
 	GPIO_PinState encoderB_status;
 
@@ -162,7 +162,7 @@ void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16
 	motor->B_PORT = b_port;
 	motor->B_PIN = b_pin;
 }
-//Faz o motor da pinça ir pra frente
+//Faz o motor da pinï¿½a ir pra frente
 void motorForward(MotorControl_Simple_t* motor, uint32_t time){
 	HAL_GPIO_WritePin(motor->A_PORT, motor->A_PIN, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(motor->B_PORT, motor->B_PIN, GPIO_PIN_RESET);
@@ -172,7 +172,7 @@ void motorForward(MotorControl_Simple_t* motor, uint32_t time){
 	HAL_GPIO_WritePin(motor->B_PORT, motor->B_PIN, GPIO_PIN_RESET);
 
 }
-//Faz o motor da pinça voltar para trás
+//Faz o motor da pinï¿½a voltar para trï¿½s
 void  motorBackward(MotorControl_Simple_t* motor, uint32_t time){
 	HAL_GPIO_WritePin(motor->A_PORT, motor->A_PIN, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(motor->B_PORT, motor->B_PIN, GPIO_PIN_SET);
@@ -182,8 +182,10 @@ void  motorBackward(MotorControl_Simple_t* motor, uint32_t time){
 	HAL_GPIO_WritePin(motor->B_PORT, motor->B_PIN, GPIO_PIN_RESET);
 
 }
-//Faz o motor da pinça furar
+//Faz o motor da pinï¿½a furar
 /*void pierce(MotorControl_Simple_t* motor, uint32_t time){
 	motorForward(motor, time);
 	motorBackward(motor, time);
 }*/
+
+
