@@ -168,6 +168,7 @@ int main(void)
 				uint8_t c = keyboardRead(&keyboard);
 				if(c == PS2_ENTER){
 					pressedEnter = 1;
+					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 				  	  	break;
 					}
 
@@ -194,7 +195,8 @@ int main(void)
 							if(buffer_braille[x] == '\0'){
 								continue;
 							}else if(buffer_braille[x] == 1){
-								//Furar
+								motorForward(&motorZ, PIERCE_TIME);
+								motorBackward(&motorZ, PIERCE_TIME);
 							}
 
 							// Decrementa posição do eixo x, espaçamento entre colunas
