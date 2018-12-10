@@ -64,9 +64,19 @@
 #define ENCODER_2_B_PORT           GPIOA
 #define ENCODER_2_B_PIN            GPIO_PIN_3
 
+
+#define MOTORX_A_PORT			   GPIOA
+#define MOTORX_A_PIN			   GPIO_PIN_4
+#define MOTORX_B_PORT			   GPIOA
+#define MOTORX_B_PIN			   GPIO_PIN_6
+
+#define MOTORY_A_PORT			   GPIOA
+#define MOTORY_A_PIN			   GPIO_PIN_7
+#define MOTORY_B_PORT			   GPIOB
+#define MOTORY_B_PIN			   GPIO_PIN_1
+
 #define MOTORZ_A_PORT			   GPIOA
 #define MOTORZ_A_PIN			   GPIO_PIN_9
-
 #define MOTORZ_B_PORT			   GPIOA
 #define MOTORZ_B_PIN			   GPIO_PIN_10
 
@@ -80,8 +90,8 @@ char isEnd = 0;
 
 Keyboard_TypeDef keyboard;
 
-MotorControl_t motorX;
-MotorControl_t motorY;
+MotorControl_Simple_t motorX;
+MotorControl_Simple_t motorY;
 
 MotorControl_Simple_t motorZ;
 //unsigned char linhaBraille[MAX_CARACTERES] = {'A','B'};
@@ -138,12 +148,13 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM14_Init();
-  MX_TIM3_Init();
-  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-	motorBegin(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
-	motorBegin(&motorY, ENCODER_2_A_PORT, ENCODER_2_A_PIN, ENCODER_2_B_PORT, ENCODER_2_B_PIN, htim3, htim3, TIM_CHANNEL_2,  TIM_CHANNEL_4);
 
+//	motorBegin(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
+//	motorBegin(&motorY, ENCODER_2_A_PORT, ENCODER_2_A_PIN, ENCODER_2_B_PORT, ENCODER_2_B_PIN, htim3, htim3, TIM_CHANNEL_2,  TIM_CHANNEL_4);
+
+  	motorSimpleBegin(&motorX, MOTORX_A_PORT, MOTORX_A_PIN, MOTORX_B_PORT, MOTORX_B_PIN);
+  	motorSimpleBegin(&motorY, MOTORY_A_PORT, MOTORY_A_PIN, MOTORY_B_PORT, MOTORY_B_PIN);
 	motorSimpleBegin(&motorZ, MOTORZ_A_PORT, MOTORZ_A_PIN, MOTORZ_B_PORT, MOTORZ_B_PIN);
 
 	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
@@ -178,77 +189,75 @@ int main(void)
 
 		/* Programa leitura do teclado */
 		if(pressedEnter){
-
+			reverse(buffer_char);
+			uint16_t length = strlen((const char*)buffer_char);
 			for(int j=0;j<3;j++){
 				//Imprime as linhas em braille
 				if(j==1){
 					//Linhas das matrizes
-					for(unsigned short i=strlen((const char*)buffer_char)-1; i>=0; --i){
+					for(int i= length- 1; i>=0; --i){
 
 						// Recebe os pontos da linha para o caractere atual
 						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
 
 						// Percorre os 4 bits, no máximo, para cada caractere
-						for(int x = 3; x >=0; ++x){
-
-							// Passa para a próxima iteração se o não tem ponto para furar
-							if(buffer_braille[x] == '\0'){
-								continue;
-							}else if(buffer_braille[x] == 1){
+						for(int x = 1; x >=0; --x){
+							if(buffer_braille[x] == '1'){
 								motorForward(&motorZ, PIERCE_TIME);
 								motorBackward(&motorZ, PIERCE_TIME);
 							}
-
 							// Decrementa posição do eixo x, espaçamento entre colunas
-							en_updateAxis(&motorX, motorX.setPoint - DELTA_COL_LIN);
+							if(x != 0){
+								updateAxis(&motorX, NEXT_DOT_LEFT);
+							}
 						}
 
 						// Decrementa posição do eixo x, espaçamento entre char na horizontal
-						en_updateAxis(&motorX, motorX.setPoint - DELTA_CHAR_H);
+						if(i != 0){
+							updateAxis(&motorX, LEFT);
+						}
 
 					}
-
-					// Decrementa posição do eixo y, espaçamento entre linhas
-					en_updateAxis(&motorY, motorY.setPoint + DELTA_COL_LIN);
 				}else{
-					unsigned short i;
+					int i;
 					//Linhas das matrizes
-					for(i=0; i<strlen((const char*)buffer_char); i++){
+					for(i=0; i<length; i++){
 
 						//Recebe os pontos da linha para o caractere atual
 						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
 
 						//Percorre os 4 bits, no máximo, para cada caractere
-						for(int x = 0; x < 4; ++x){
-
-							if(buffer_braille[x] == '\0'){
-								break;
-							}else if(buffer_braille[x] == 1){
+						for(int x = 0; x < 2; ++x){
+							if(buffer_braille[x] == '1'){
 								motorForward(&motorZ, PIERCE_TIME);
 								motorBackward(&motorZ, PIERCE_TIME);
 							}
 
 							// Incrementa posição do eixo x, espaçamento entre colunas
-							en_updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
+							if(x != 1){
+								updateAxis(&motorX, NEXT_DOT_RIGHT);
+							}
 						}
 
 						// Incrementa posição do eixo x, espaçamento entre char na horizontal
-						en_updateAxis(&motorX, motorX.setPoint + DELTA_CHAR_H);
+						if(i != (length - 1)){
+							updateAxis(&motorX, RIGHT);
+						}
 
 					}
-
-					// Incrementa posição do eixo y, espaçamento entre linhas
-					en_updateAxis(&motorY, motorY.setPoint + DELTA_COL_LIN);
 				}
+				// Decrementa posição do eixo y, espaçamento entre linhas
+				updateAxis(&motorY, DOWN_NEXT_LINE);
 			}
 
 			// Incrementa posição do eixo y, espaçamento entre char na vertical
-			en_updateAxis(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
+			updateAxis(&motorY, DOWN);
 
 			// Seta posição eixo x para inicial
-			en_updateAxis(&motorX, POS_INI);
+			updateAxis(&motorX, POS_INI);
 
 			pressedEnter = 0;
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		}
 		clearBuffer(buffer_char);
 

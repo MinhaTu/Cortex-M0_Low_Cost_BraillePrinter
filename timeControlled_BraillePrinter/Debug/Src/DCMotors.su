@@ -1,7 +1,7 @@
 DCMotors.c:5:6:motorBegin	24	static
 DCMotors.c:7:8:myABS	24	static
 DCMotors.c:15:6:en_updateAxis	16	static
-DCMotors.c:17:6:motorSmpleBegin	24	static
+DCMotors.c:17:6:motorSimpleBegin	24	static
 DCMotors.c:25:6:motorForward	16	static
 DCMotors.c:35:7:motorBackward	16	static
 DCMotors.c:50:6:updateAxis	16	static

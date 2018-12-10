@@ -14,7 +14,7 @@ double myABS(double num1){
 
 void en_updateAxis(MotorControl_t* motor,signed long setPoint){}
 
-void motorSmpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin){
+void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin){
 	motor->A_PORT = a_port;
 	motor->A_PIN = a_pin;
 
@@ -61,5 +61,16 @@ void updateAxis(MotorControl_Simple_t* motor, uint8_t direction){
 		case UP:
 			motorBackward(motor, TIME_VER);
 		break;
+		case NEXT_DOT_RIGHT:
+			motorForward(motor, TIME_NEXT_DOT);
+		break;
+		case NEXT_DOT_LEFT:
+			motorBackward(motor, TIME_NEXT_DOT);
+		break;
+		case DOWN_NEXT_LINE:
+			motorForward(motor, TIME_NEXT_DOT);
+		break;
+		case INIT:
+			motorBackward(motor, TIME_INIT);
 	}
 }

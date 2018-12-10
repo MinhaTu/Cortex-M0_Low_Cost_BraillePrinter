@@ -23,15 +23,20 @@
 #define MIN_DUTYCYCLE 		100   	//0 - 255 (125)
 #define MAX_DUTYCYCLE 		127  	//0 - 255 (255)
 
-#define PIERCE_TIME			100		//Tempo para furar
-#define TIME_HOR			100		//Tempo para mover o cabeçote na horizontal
-#define TIME_VER			300		//Tempo para mover o cabeçote na vertical
+#define PIERCE_TIME			300		//Tempo para furar
+#define TIME_HOR			1500		//Tempo para mover o cabeçote na horizontal
+#define TIME_VER			1500		//Tempo para mover o cabeçote na vertical
+#define TIME_NEXT_DOT		1500		//Tempo para mover para próxima coluna
+#define TIME_INIT			4000	//Tempo para voltar para o início
 
 #define RIGHT				0
 #define LEFT				1
 #define UP					3
 #define DOWN				4
-
+#define NEXT_DOT_RIGHT 		5
+#define NEXT_DOT_LEFT		6
+#define DOWN_NEXT_LINE		7
+#define INIT				8
 
 typedef struct{
 	signed long setPoint;

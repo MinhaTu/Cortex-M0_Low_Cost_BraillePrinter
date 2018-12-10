@@ -62,20 +62,20 @@
 #define SENSOR_2_A_GPIO_Port GPIOA
 #define SENSOR_2___B_Pin GPIO_PIN_3
 #define SENSOR_2___B_GPIO_Port GPIOA
-#define Motor___X___A_Pin GPIO_PIN_4
-#define Motor___X___A_GPIO_Port GPIOA
+#define MOTOR___X___A_Pin GPIO_PIN_4
+#define MOTOR___X___A_GPIO_Port GPIOA
 #define LED_Pin GPIO_PIN_5
 #define LED_GPIO_Port GPIOA
 #define MOTOR___X___B_Pin GPIO_PIN_6
 #define MOTOR___X___B_GPIO_Port GPIOA
-#define MOTOR_Y___A_Pin GPIO_PIN_7
-#define MOTOR_Y___A_GPIO_Port GPIOA
-#define MOTOR_Y___B_Pin GPIO_PIN_1
-#define MOTOR_Y___B_GPIO_Port GPIOB
-#define MOTOR_Z___A_Pin GPIO_PIN_9
-#define MOTOR_Z___A_GPIO_Port GPIOA
-#define MOTOR_Z___B_Pin GPIO_PIN_10
-#define MOTOR_Z___B_GPIO_Port GPIOA
+#define MOTOR___Y___A_Pin GPIO_PIN_7
+#define MOTOR___Y___A_GPIO_Port GPIOA
+#define MOTOR___Y___B_Pin GPIO_PIN_1
+#define MOTOR___Y___B_GPIO_Port GPIOB
+#define MOTOR___Z___A_Pin GPIO_PIN_9
+#define MOTOR___Z___A_GPIO_Port GPIOA
+#define MOTOR___Z___B_Pin GPIO_PIN_10
+#define MOTOR___Z___B_GPIO_Port GPIOA
 
 /* ########################## Assert Selection ############################## */
 /**
