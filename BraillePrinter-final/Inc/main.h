@@ -62,6 +62,12 @@
 #define Motor_Z_A_GPIO_Port GPIOA
 #define Motor_Z_B_Pin GPIO_PIN_3
 #define Motor_Z_B_GPIO_Port GPIOA
+#define MOTOR_Y_A_Pin GPIO_PIN_4
+#define MOTOR_Y_A_GPIO_Port GPIOA
+#define OUTPUT_LED_Pin GPIO_PIN_5
+#define OUTPUT_LED_GPIO_Port GPIOA
+#define MOTOR_Y_B_Pin GPIO_PIN_1
+#define MOTOR_Y_B_GPIO_Port GPIOB
 #define MOTOR_X_A_Pin GPIO_PIN_9
 #define MOTOR_X_A_GPIO_Port GPIOA
 #define MOTOR_X_B_Pin GPIO_PIN_10
