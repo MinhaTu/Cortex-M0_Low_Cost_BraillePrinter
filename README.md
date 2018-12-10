@@ -56,8 +56,9 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     In this way, we obtained a movable base with a central screw.
     5. The bearings placed on the outside should fit perfectly on the outside of the two aluminum structures (40cm x 0.4cm) fixed to the base.
     6. We create a fastening and rotation structure from the association of the DC motor with gears and the creation of a base to fix the motor.
+    7. The encoder was fixed in an improvised wooden base so that the movement could be calibrated.
 ### Structure of the X Axis:
-    Basically, we positioned the CNC that was extracted from an old printer that we disassembled.
+    Basically, we positioned the CNC that was extracted from an old printer that we've umounted and then we put the encoder to calibrate the axis moviment.
 ### Structure of the Z Axis:
     We attach a type of knitting needle to a DC motor and we sand its tip so that the degree of perforation is reduced and we have points closer to the actual Braille writing.
     
@@ -70,16 +71,17 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     Desse modo, obtivemos uma base móvel com um parafuso central.
     5. Os rolamentos colocados na parte externa devem se encaixar perfeitamente na parte exterior das duas estruturas de alumínio (40cm x 0,4cm) fixadas na base.
     6. Criamos uma estrutura de fixação e rotação a partir da associação do motor DC com engrenagens e da criação de uma base para fixar o motor.
+    7. O encoder foi fixado numa base de madeira improvisada para que se pudesse calibrar a movimentação.
 ### Estrutura do Eixo X:
-    Basicamente, posicionamos o CNC que foi extraído de uma impressora antiga que desmontamos.
+    Basicamente, posicionamos o CNC que foi extraído de uma impressora antiga que desmontamos e colocamos o encoder para calibrar o movimento do eixo.
 ### Estrutura do Eixo Z:
     Acoplamos um tipo de agulha de tricô a um motor DC e lixamos a sua ponta para que o grau de perfuração seja reduzido e tenhamos pontos mais próximos da escrita real de Braille.
     
 ## How does it work?
-    The device operates by an input via the PS2 keyboard, which is stored in a buffer within the cortex-M0. In this, what was passed by the keyboard goes through an algorithm to count the number of characters that could be printed per line at the time of transcribing for braille. The algorithm inverts the phrase and uses an array that contains the braille letters to be able to print line by line, being coordinated by the code and calibrated via an encoder.
+    The device operates by an input via the PS2 keyboard, which is stored in a buffer within the cortex-M0. In this, what was passed by the keyboard goes through an algorithm to count the number of characters that will be printed per line at the time of transcribing for braille. The algorithm inverts the phrase and uses an array that contains the braille letters to be able to print line by line, being coordinated by the code and calibrated via an encoder.
 
 ## Como funciona?
-    O funcionamento do dispositivo se dá a partir de uma entrada, via teclado PS2, que é armazenada num buffer dentro do cortex-M0. Nisso, o que foi passado pelo teclado passa por um algoritmo para contar o número que caracteres que poderam ser imprimidos por linha na hora de transcrever para braille. O algoritmo inverte a frase e utiliza de uma matriz que contém as letras em braille para poder imprimir linha a linha, sendo coordenado pelo código e calibrado via encoder.
+    O funcionamento do dispositivo se dá a partir de uma entrada, via teclado PS2, que é armazenada num buffer dentro do cortex-M0. Nisso, o que foi passado pelo teclado passa por um algoritmo para contar o número que caracteres que poderão ser imprimidos por linha na hora de transcrever para braille. O algoritmo inverte a frase e utiliza de uma matriz que contém as letras em braille para poder imprimir linha a linha, sendo coordenado pelo código e calibrado via encoder.
 
 ## Limitations
     -The printer works by printing line to line, so it is not possible to pass a full text uninterruptedly via the PS2 keyboard and it is necessary to pass line by line so that the printer can print correctly.
