@@ -11,8 +11,8 @@
 #include "DCMotors.h"
 #include "stm32f0xx_hal.h"
 
-#define DELTA_COL_LIN 		22
-#define DELTA_CHAR_H 		31
+#define DELTA_COL_LIN 		18
+#define DELTA_CHAR_H 		30
 #define DELTA_CHAR_V 		127
 
 #define P_FRACTION 			1.0     //Proportional factor of control loop 0.001 - 10.0 (1.0)
@@ -49,11 +49,11 @@ typedef struct{
 }MotorControl_Simple_t;
 
 void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t encoder_CE_pin, TIM_HandleTypeDef timer_left, TIM_HandleTypeDef timer_right, uint16_t channel_left, uint16_t channel_right);
-void atualizarEixo(MotorControl_t* motor,signed long setPoint);
+void updateAxis(MotorControl_t* motor,signed long setPoint);
 void motorBackward(MotorControl_Simple_t* motor, uint32_t time);
 void motorForward(MotorControl_Simple_t* motor, uint32_t time);
 void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin);
-//void pierce(MotorControl_Simple_t* motor, uint32_t time);
+void pierce(MotorControl_Simple_t* motor, uint32_t time);
 double myABS(double num1);
 
 #endif /* DCMOTORS_H_ */

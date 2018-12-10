@@ -21,21 +21,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   8 .ARM.attributes 00000028  00000000  00000000  000200b0  2**0
                   CONTENTS, READONLY
-  9 .debug_info   0000f73a  00000000  00000000  000200d8  2**0
+  9 .debug_info   0000f72a  00000000  00000000  000200d8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 00002177  00000000  00000000  0002f812  2**0
+ 10 .debug_abbrev 00002177  00000000  00000000  0002f802  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000950  00000000  00000000  00031990  2**3
+ 11 .debug_aranges 00000950  00000000  00000000  00031980  2**3
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000870  00000000  00000000  000322e0  2**3
+ 12 .debug_ranges 00000870  00000000  00000000  000322d0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   000047b1  00000000  00000000  00032b50  2**0
+ 13 .debug_line   000047b1  00000000  00000000  00032b40  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00002bd7  00000000  00000000  00037301  2**0
+ 14 .debug_str    00002bc7  00000000  00000000  000372f1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .comment      0000007c  00000000  00000000  00039ed8  2**0
+ 15 .comment      0000007c  00000000  00000000  00039eb8  2**0
                   CONTENTS, READONLY
- 16 .debug_frame  00002140  00000000  00000000  00039f54  2**2
+ 16 .debug_frame  00002140  00000000  00000000  00039f34  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -8215,43 +8215,43 @@ void interruption(){
  80031d4:	200000d8 	.word	0x200000d8
 
 080031d8 <main>:
-  * @brief  The application entry point.
-  *
-  * @retval None
-  */
+ * @brief  The application entry point.
+ *
+ * @retval None
+ */
 int main(void)
 {
  80031d8:	b5f0      	push	{r4, r5, r6, r7, lr}
  80031da:	b0ab      	sub	sp, #172	; 0xac
  80031dc:	af24      	add	r7, sp, #144	; 0x90
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration----------------------------------------------------------*/
+	/* MCU Configuration----------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
  80031de:	f7fd fd2d 	bl	8000c3c <HAL_Init>
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
  80031e2:	f000 f99f 	bl	8003524 <SystemClock_Config>
-  /* USER CODE BEGIN SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
  80031e6:	f7ff ff3d 	bl	8003064 <MX_GPIO_Init>
-  MX_TIM14_Init();
+	MX_TIM14_Init();
  80031ea:	f000 fbb5 	bl	8003958 <MX_TIM14_Init>
-  MX_TIM3_Init();
+	MX_TIM3_Init();
  80031ee:	f000 fb3b 	bl	8003868 <MX_TIM3_Init>
-  MX_TIM1_Init();
+	MX_TIM1_Init();
  80031f2:	f000 fa97 	bl	8003724 <MX_TIM1_Init>
-  /* USER CODE BEGIN 2 */
+	/* USER CODE BEGIN 2 */
 	motorBegin(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
  80031f6:	4ebe      	ldr	r6, [pc, #760]	; (80034f0 <main+0x318>)
  80031f8:	4dbd      	ldr	r5, [pc, #756]	; (80034f0 <main+0x318>)
@@ -8343,7 +8343,7 @@ int main(void)
  80032a8:	2202      	movs	r2, #2
  80032aa:	f7ff fdb1 	bl	8002e10 <keyboardBegin>
 
-  /* USER CODE BEGIN 3 */
+		/* USER CODE BEGIN 3 */
 
 		/* Faz a leitura do teclado e envia ao buffer_char */
 		while(1){
@@ -8393,7 +8393,7 @@ int main(void)
  80032fe:	2120      	movs	r1, #32
  8003300:	0018      	movs	r0, r3
  8003302:	f7fd ff92 	bl	800122a <HAL_GPIO_WritePin>
-				  	  	break;
+					break;
  8003306:	46c0      	nop			; (mov r8, r8)
 				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
@@ -8722,85 +8722,85 @@ int main(void)
 
 08003524 <SystemClock_Config>:
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
  8003524:	b580      	push	{r7, lr}
  8003526:	b090      	sub	sp, #64	; 0x40
  8003528:	af00      	add	r7, sp, #0
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+	RCC_OscInitTypeDef RCC_OscInitStruct;
+	RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
-    /**Initializes the CPU, AHB and APB busses clocks 
-    */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+	/**Initializes the CPU, AHB and APB busses clocks
+	 */
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
  800352a:	2310      	movs	r3, #16
  800352c:	18fb      	adds	r3, r7, r3
  800352e:	2202      	movs	r2, #2
  8003530:	601a      	str	r2, [r3, #0]
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
  8003532:	2310      	movs	r3, #16
  8003534:	18fb      	adds	r3, r7, r3
  8003536:	2201      	movs	r2, #1
  8003538:	60da      	str	r2, [r3, #12]
-  RCC_OscInitStruct.HSICalibrationValue = 16;
+	RCC_OscInitStruct.HSICalibrationValue = 16;
  800353a:	2310      	movs	r3, #16
  800353c:	18fb      	adds	r3, r7, r3
  800353e:	2210      	movs	r2, #16
  8003540:	611a      	str	r2, [r3, #16]
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
  8003542:	2310      	movs	r3, #16
  8003544:	18fb      	adds	r3, r7, r3
  8003546:	2200      	movs	r2, #0
  8003548:	621a      	str	r2, [r3, #32]
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
  800354a:	2310      	movs	r3, #16
  800354c:	18fb      	adds	r3, r7, r3
  800354e:	0018      	movs	r0, r3
  8003550:	f7fd feae 	bl	80012b0 <HAL_RCC_OscConfig>
  8003554:	1e03      	subs	r3, r0, #0
  8003556:	d006      	beq.n	8003566 <SystemClock_Config+0x42>
-  {
-    _Error_Handler(__FILE__, __LINE__);
+	{
+		_Error_Handler(__FILE__, __LINE__);
  8003558:	238c      	movs	r3, #140	; 0x8c
  800355a:	005a      	lsls	r2, r3, #1
  800355c:	4b1c      	ldr	r3, [pc, #112]	; (80035d0 <SystemClock_Config+0xac>)
  800355e:	0011      	movs	r1, r2
  8003560:	0018      	movs	r0, r3
  8003562:	f000 f837 	bl	80035d4 <_Error_Handler>
-  }
+	}
 
-    /**Initializes the CPU, AHB and APB busses clocks 
-    */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+	/**Initializes the CPU, AHB and APB busses clocks
+	 */
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
  8003566:	003b      	movs	r3, r7
  8003568:	2207      	movs	r2, #7
  800356a:	601a      	str	r2, [r3, #0]
-                              |RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+			|RCC_CLOCKTYPE_PCLK1;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
  800356c:	003b      	movs	r3, r7
  800356e:	2200      	movs	r2, #0
  8003570:	605a      	str	r2, [r3, #4]
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
  8003572:	003b      	movs	r3, r7
  8003574:	2200      	movs	r2, #0
  8003576:	609a      	str	r2, [r3, #8]
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
  8003578:	003b      	movs	r3, r7
  800357a:	2200      	movs	r2, #0
  800357c:	60da      	str	r2, [r3, #12]
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
  800357e:	003b      	movs	r3, r7
  8003580:	2100      	movs	r1, #0
  8003582:	0018      	movs	r0, r3
  8003584:	f7fe f988 	bl	8001898 <HAL_RCC_ClockConfig>
  8003588:	1e03      	subs	r3, r0, #0
  800358a:	d007      	beq.n	800359c <SystemClock_Config+0x78>
-  {
-    _Error_Handler(__FILE__, __LINE__);
+	{
+		_Error_Handler(__FILE__, __LINE__);
  800358c:	2326      	movs	r3, #38	; 0x26
  800358e:	33ff      	adds	r3, #255	; 0xff
  8003590:	001a      	movs	r2, r3
@@ -8808,11 +8808,11 @@ void SystemClock_Config(void)
  8003594:	0011      	movs	r1, r2
  8003596:	0018      	movs	r0, r3
  8003598:	f000 f81c 	bl	80035d4 <_Error_Handler>
-  }
+	}
 
-    /**Configure the Systick interrupt time 
-    */
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+	/**Configure the Systick interrupt time
+	 */
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
  800359c:	f7fe fac2 	bl	8001b24 <HAL_RCC_GetHCLKFreq>
  80035a0:	0002      	movs	r2, r0
  80035a2:	23fa      	movs	r3, #250	; 0xfa
@@ -8823,14 +8823,14 @@ void SystemClock_Config(void)
  80035ae:	0018      	movs	r0, r3
  80035b0:	f7fd fc76 	bl	8000ea0 <HAL_SYSTICK_Config>
 
-    /**Configure the Systick 
-    */
-  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+	/**Configure the Systick
+	 */
+	HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
  80035b4:	2004      	movs	r0, #4
  80035b6:	f7fd fc81 	bl	8000ebc <HAL_SYSTICK_CLKSourceConfig>
 
-  /* SysTick_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+	/* SysTick_IRQn interrupt configuration */
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
  80035ba:	2301      	movs	r3, #1
  80035bc:	425b      	negs	r3, r3
  80035be:	2200      	movs	r2, #0
@@ -8845,10 +8845,10 @@ void SystemClock_Config(void)
  80035d0:	08003cb0 	.word	0x08003cb0
 
 080035d4 <_Error_Handler>:
-  * @param  file: The file name as string.
-  * @param  line: The line in file as a number.
-  * @retval None
-  */
+ * @param  file: The file name as string.
+ * @param  line: The line in file as a number.
+ * @retval None
+ */
 void _Error_Handler(char *file, int line)
 {
  80035d4:	b580      	push	{r7, lr}
@@ -8856,7 +8856,7 @@ void _Error_Handler(char *file, int line)
  80035d8:	af00      	add	r7, sp, #0
  80035da:	6078      	str	r0, [r7, #4]
  80035dc:	6039      	str	r1, [r7, #0]
-  /* USER CODE BEGIN Error_Handler_Debug */
+	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	while(1)
  80035de:	e7fe      	b.n	80035de <_Error_Handler+0xa>

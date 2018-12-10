@@ -135,9 +135,7 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
-		atualizarEixo(&motorX, motorX.setPoint + 120);
-		HAL_Delay(1000);
-		atualizarEixo(&motorX, motorX.setPoint - 120);
+		atualizarEixo(&motorX, motorX.setPoint + 100);
 		HAL_Delay(1000);
 
 		/* USER CODE END WHILE */

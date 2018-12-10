@@ -994,7 +994,7 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000008000000                g_pfnVectors
                 0x00000000080000c0                . = ALIGN (0x4)
 
-.text           0x00000000080000c0     0x328c
+.text           0x00000000080000c0     0x3270
                 0x00000000080000c0                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000080000c0       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
@@ -1168,169 +1168,169 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
  .text.interruption
                 0x0000000008002bc0       0x18 Src/main.o
                 0x0000000008002bc0                interruption
- .text.main     0x0000000008002bd8       0xf0 Src/main.o
+ .text.main     0x0000000008002bd8       0xd4 Src/main.o
                 0x0000000008002bd8                main
  .text.SystemClock_Config
-                0x0000000008002cc8       0xb0 Src/main.o
-                0x0000000008002cc8                SystemClock_Config
+                0x0000000008002cac       0xb0 Src/main.o
+                0x0000000008002cac                SystemClock_Config
  .text._Error_Handler
-                0x0000000008002d78        0xc Src/main.o
-                0x0000000008002d78                _Error_Handler
+                0x0000000008002d5c        0xc Src/main.o
+                0x0000000008002d5c                _Error_Handler
  .text.HAL_MspInit
-                0x0000000008002d84       0x70 Src/stm32f0xx_hal_msp.o
-                0x0000000008002d84                HAL_MspInit
+                0x0000000008002d68       0x70 Src/stm32f0xx_hal_msp.o
+                0x0000000008002d68                HAL_MspInit
  .text.NMI_Handler
-                0x0000000008002df4        0xa Src/stm32f0xx_it.o
-                0x0000000008002df4                NMI_Handler
+                0x0000000008002dd8        0xa Src/stm32f0xx_it.o
+                0x0000000008002dd8                NMI_Handler
  .text.HardFault_Handler
-                0x0000000008002dfe        0x6 Src/stm32f0xx_it.o
-                0x0000000008002dfe                HardFault_Handler
+                0x0000000008002de2        0x6 Src/stm32f0xx_it.o
+                0x0000000008002de2                HardFault_Handler
  .text.SVC_Handler
-                0x0000000008002e04        0xa Src/stm32f0xx_it.o
-                0x0000000008002e04                SVC_Handler
+                0x0000000008002de8        0xa Src/stm32f0xx_it.o
+                0x0000000008002de8                SVC_Handler
  .text.PendSV_Handler
-                0x0000000008002e0e        0xa Src/stm32f0xx_it.o
-                0x0000000008002e0e                PendSV_Handler
+                0x0000000008002df2        0xa Src/stm32f0xx_it.o
+                0x0000000008002df2                PendSV_Handler
  .text.SysTick_Handler
-                0x0000000008002e18       0x12 Src/stm32f0xx_it.o
-                0x0000000008002e18                SysTick_Handler
+                0x0000000008002dfc       0x12 Src/stm32f0xx_it.o
+                0x0000000008002dfc                SysTick_Handler
  .text.EXTI0_1_IRQHandler
-                0x0000000008002e2a       0x14 Src/stm32f0xx_it.o
-                0x0000000008002e2a                EXTI0_1_IRQHandler
- *fill*         0x0000000008002e3e        0x2 
+                0x0000000008002e0e       0x14 Src/stm32f0xx_it.o
+                0x0000000008002e0e                EXTI0_1_IRQHandler
+ *fill*         0x0000000008002e22        0x2 
  .text.SystemInit
-                0x0000000008002e40       0x88 Src/system_stm32f0xx.o
-                0x0000000008002e40                SystemInit
+                0x0000000008002e24       0x88 Src/system_stm32f0xx.o
+                0x0000000008002e24                SystemInit
  .text.MX_TIM1_Init
-                0x0000000008002ec8      0x144 Src/tim.o
-                0x0000000008002ec8                MX_TIM1_Init
+                0x0000000008002eac      0x144 Src/tim.o
+                0x0000000008002eac                MX_TIM1_Init
  .text.MX_TIM3_Init
-                0x000000000800300c       0xcc Src/tim.o
-                0x000000000800300c                MX_TIM3_Init
+                0x0000000008002ff0       0xcc Src/tim.o
+                0x0000000008002ff0                MX_TIM3_Init
  .text.MX_TIM14_Init
-                0x00000000080030d8       0x50 Src/tim.o
-                0x00000000080030d8                MX_TIM14_Init
+                0x00000000080030bc       0x50 Src/tim.o
+                0x00000000080030bc                MX_TIM14_Init
  .text.HAL_TIM_PWM_MspInit
-                0x0000000008003128       0x40 Src/tim.o
-                0x0000000008003128                HAL_TIM_PWM_MspInit
+                0x000000000800310c       0x40 Src/tim.o
+                0x000000000800310c                HAL_TIM_PWM_MspInit
  .text.HAL_TIM_Encoder_MspInit
-                0x0000000008003168       0x74 Src/tim.o
-                0x0000000008003168                HAL_TIM_Encoder_MspInit
+                0x000000000800314c       0x74 Src/tim.o
+                0x000000000800314c                HAL_TIM_Encoder_MspInit
  .text.HAL_TIM_Base_MspInit
-                0x00000000080031dc       0x40 Src/tim.o
-                0x00000000080031dc                HAL_TIM_Base_MspInit
+                0x00000000080031c0       0x40 Src/tim.o
+                0x00000000080031c0                HAL_TIM_Base_MspInit
  .text.HAL_TIM_MspPostInit
-                0x000000000800321c       0x58 Src/tim.o
-                0x000000000800321c                HAL_TIM_MspPostInit
+                0x0000000008003200       0x58 Src/tim.o
+                0x0000000008003200                HAL_TIM_MspPostInit
  .text.Reset_Handler
-                0x0000000008003274       0x50 startup/startup_stm32f030x6.o
-                0x0000000008003274                Reset_Handler
+                0x0000000008003258       0x50 startup/startup_stm32f030x6.o
+                0x0000000008003258                Reset_Handler
  .text.Default_Handler
-                0x00000000080032c4        0x2 startup/startup_stm32f030x6.o
-                0x00000000080032c4                TIM1_CC_IRQHandler
-                0x00000000080032c4                I2C1_IRQHandler
-                0x00000000080032c4                SPI1_IRQHandler
-                0x00000000080032c4                EXTI2_3_IRQHandler
-                0x00000000080032c4                ADC1_IRQHandler
-                0x00000000080032c4                TIM17_IRQHandler
-                0x00000000080032c4                RTC_IRQHandler
-                0x00000000080032c4                TIM16_IRQHandler
-                0x00000000080032c4                TIM3_IRQHandler
-                0x00000000080032c4                EXTI4_15_IRQHandler
-                0x00000000080032c4                RCC_IRQHandler
-                0x00000000080032c4                DMA1_Channel1_IRQHandler
-                0x00000000080032c4                Default_Handler
-                0x00000000080032c4                TIM14_IRQHandler
-                0x00000000080032c4                DMA1_Channel4_5_IRQHandler
-                0x00000000080032c4                WWDG_IRQHandler
-                0x00000000080032c4                DMA1_Channel2_3_IRQHandler
-                0x00000000080032c4                FLASH_IRQHandler
-                0x00000000080032c4                USART1_IRQHandler
-                0x00000000080032c4                TIM1_BRK_UP_TRG_COM_IRQHandler
- *fill*         0x00000000080032c6        0x2 
+                0x00000000080032a8        0x2 startup/startup_stm32f030x6.o
+                0x00000000080032a8                TIM1_CC_IRQHandler
+                0x00000000080032a8                I2C1_IRQHandler
+                0x00000000080032a8                SPI1_IRQHandler
+                0x00000000080032a8                EXTI2_3_IRQHandler
+                0x00000000080032a8                ADC1_IRQHandler
+                0x00000000080032a8                TIM17_IRQHandler
+                0x00000000080032a8                RTC_IRQHandler
+                0x00000000080032a8                TIM16_IRQHandler
+                0x00000000080032a8                TIM3_IRQHandler
+                0x00000000080032a8                EXTI4_15_IRQHandler
+                0x00000000080032a8                RCC_IRQHandler
+                0x00000000080032a8                DMA1_Channel1_IRQHandler
+                0x00000000080032a8                Default_Handler
+                0x00000000080032a8                TIM14_IRQHandler
+                0x00000000080032a8                DMA1_Channel4_5_IRQHandler
+                0x00000000080032a8                WWDG_IRQHandler
+                0x00000000080032a8                DMA1_Channel2_3_IRQHandler
+                0x00000000080032a8                FLASH_IRQHandler
+                0x00000000080032a8                USART1_IRQHandler
+                0x00000000080032a8                TIM1_BRK_UP_TRG_COM_IRQHandler
+ *fill*         0x00000000080032aa        0x2 
  .text.__libc_init_array
-                0x00000000080032c8       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
-                0x00000000080032c8                __libc_init_array
- .text.memcpy   0x0000000008003310       0x12 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
-                0x0000000008003310                memcpy
- .text.memset   0x0000000008003322       0x10 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
-                0x0000000008003322                memset
+                0x00000000080032ac       0x48 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-init.o)
+                0x00000000080032ac                __libc_init_array
+ .text.memcpy   0x00000000080032f4       0x12 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x00000000080032f4                memcpy
+ .text.memset   0x0000000008003306       0x10 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/../../../../arm-atollic-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
+                0x0000000008003306                memset
  *(.glue_7)
- .glue_7        0x0000000008003332        0x0 linker stubs
+ .glue_7        0x0000000008003316        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x0000000008003332        0x0 linker stubs
+ .glue_7t       0x0000000008003316        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x0000000008003332        0x2 
- .eh_frame      0x0000000008003334        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ *fill*         0x0000000008003316        0x2 
+ .eh_frame      0x0000000008003318        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
  *(.init)
- .init          0x0000000008003334        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
-                0x0000000008003334                _init
- .init          0x0000000008003338        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+ .init          0x0000000008003318        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+                0x0000000008003318                _init
+ .init          0x000000000800331c        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
  *(.fini)
- .fini          0x0000000008003340        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
-                0x0000000008003340                _fini
- .fini          0x0000000008003344        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
-                0x000000000800334c                . = ALIGN (0x4)
-                0x000000000800334c                _etext = .
+ .fini          0x0000000008003324        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crti.o
+                0x0000000008003324                _fini
+ .fini          0x0000000008003328        0x8 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtn.o
+                0x0000000008003330                . = ALIGN (0x4)
+                0x0000000008003330                _etext = .
 
-.vfp11_veneer   0x000000000800334c        0x0
- .vfp11_veneer  0x000000000800334c        0x0 linker stubs
+.vfp11_veneer   0x0000000008003330        0x0
+ .vfp11_veneer  0x0000000008003330        0x0 linker stubs
 
-.v4_bx          0x000000000800334c        0x0
- .v4_bx         0x000000000800334c        0x0 linker stubs
+.v4_bx          0x0000000008003330        0x0
+ .v4_bx         0x0000000008003330        0x0 linker stubs
 
-.iplt           0x000000000800334c        0x0
- .iplt          0x000000000800334c        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+.iplt           0x0000000008003330        0x0
+ .iplt          0x0000000008003330        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
 
-.rodata         0x000000000800334c      0x164
-                0x000000000800334c                . = ALIGN (0x4)
+.rodata         0x0000000008003330      0x164
+                0x0000000008003330                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x000000000800334c       0x20 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o
- .rodata        0x000000000800336c        0xe Src/main.o
- *fill*         0x000000000800337a        0x2 
- .rodata        0x000000000800337c        0xd Src/tim.o
+ .rodata        0x0000000008003330       0x20 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.o
+ .rodata        0x0000000008003350        0xe Src/main.o
+ *fill*         0x000000000800335e        0x2 
+ .rodata        0x0000000008003360        0xd Src/tim.o
  *(.rodata*)
- *fill*         0x0000000008003389        0x3 
+ *fill*         0x000000000800336d        0x3 
  .rodata.PS2Keymap_US
-                0x000000000800338c      0x114 Src/PS2Keyboard.o
-                0x000000000800338c                PS2Keymap_US
+                0x0000000008003370      0x114 Src/PS2Keyboard.o
+                0x0000000008003370                PS2Keymap_US
  .rodata.AHBPrescTable
-                0x00000000080034a0       0x10 Src/system_stm32f0xx.o
-                0x00000000080034a0                AHBPrescTable
-                0x00000000080034b0                . = ALIGN (0x4)
+                0x0000000008003484       0x10 Src/system_stm32f0xx.o
+                0x0000000008003484                AHBPrescTable
+                0x0000000008003494                . = ALIGN (0x4)
 
-.rel.dyn        0x00000000080034b0        0x0
- .rel.iplt      0x00000000080034b0        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+.rel.dyn        0x0000000008003494        0x0
+ .rel.iplt      0x0000000008003494        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00000000080034b0        0x0
-                0x00000000080034b0                __exidx_start = .
+.ARM            0x0000000008003494        0x0
+                0x0000000008003494                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080034b0                __exidx_end = .
+                0x0000000008003494                __exidx_end = .
 
-.preinit_array  0x00000000080034b0        0x0
-                0x00000000080034b0                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x0000000008003494        0x0
+                0x0000000008003494                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x00000000080034b0                PROVIDE (__preinit_array_end, .)
+                0x0000000008003494                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00000000080034b0        0x4
-                0x00000000080034b0                PROVIDE (__init_array_start, .)
+.init_array     0x0000000008003494        0x4
+                0x0000000008003494                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x00000000080034b0        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
-                0x00000000080034b4                PROVIDE (__init_array_end, .)
+ .init_array    0x0000000008003494        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+                0x0000000008003498                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00000000080034b4        0x4
+.fini_array     0x0000000008003498        0x4
                 [!provide]                        PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080034b4        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
+ .fini_array    0x0000000008003498        0x4 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end, .)
-                0x00000000080034b8                _sidata = LOADADDR (.data)
+                0x000000000800349c                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x4 load address 0x00000000080034b8
+.data           0x0000000020000000        0x4 load address 0x000000000800349c
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1341,11 +1341,11 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x0000000020000004                . = ALIGN (0x4)
                 0x0000000020000004                _edata = .
 
-.igot.plt       0x0000000020000004        0x0 load address 0x00000000080034bc
+.igot.plt       0x0000000020000004        0x0 load address 0x00000000080034a0
  .igot.plt      0x0000000020000004        0x0 /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-atollic-eabi/6.3.1/armv6-m/crtbegin.o
                 0x0000000020000004                . = ALIGN (0x4)
 
-.bss            0x0000000020000004      0x278 load address 0x00000000080034bc
+.bss            0x0000000020000004      0x278 load address 0x00000000080034a0
                 0x0000000020000004                _sbss = .
                 0x0000000020000004                __bss_start__ = _sbss
  *(.bss)
@@ -1377,7 +1377,7 @@ LOAD /opt/Atollic_TrueSTUDIO_for_STM32_x86_64_9.0.1/ARMTools/bin/../lib/gcc/arm-
                 0x000000002000027c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x000000002000027c      0x600 load address 0x00000000080034bc
+                0x000000002000027c      0x600 load address 0x00000000080034a0
                 0x000000002000027c                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (end, .)
                 [!provide]                        PROVIDE (_end, .)
@@ -1544,7 +1544,7 @@ OUTPUT(PleaseWork.elf elf32-littlearm)
  .debug_ranges  0x00000000000007c8       0x58 Src/tim.o
  .debug_ranges  0x0000000000000820       0x20 startup/startup_stm32f030x6.o
 
-.debug_line     0x0000000000000000     0x4460
+.debug_line     0x0000000000000000     0x4456
  .debug_line    0x0000000000000000      0x3e2 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
  .debug_line    0x00000000000003e2      0x408 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.o
  .debug_line    0x00000000000007ea      0x3e8 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.o
@@ -1554,12 +1554,12 @@ OUTPUT(PleaseWork.elf elf32-littlearm)
  .debug_line    0x0000000000002e12      0x321 Src/DCMotors.o
  .debug_line    0x0000000000003133      0x368 Src/PS2Keyboard.o
  .debug_line    0x000000000000349b      0x241 Src/gpio.o
- .debug_line    0x00000000000036dc      0x308 Src/main.o
- .debug_line    0x00000000000039e4      0x1ff Src/stm32f0xx_hal_msp.o
- .debug_line    0x0000000000003be3      0x241 Src/stm32f0xx_it.o
- .debug_line    0x0000000000003e24      0x22e Src/system_stm32f0xx.o
- .debug_line    0x0000000000004052      0x38b Src/tim.o
- .debug_line    0x00000000000043dd       0x83 startup/startup_stm32f030x6.o
+ .debug_line    0x00000000000036dc      0x2fe Src/main.o
+ .debug_line    0x00000000000039da      0x1ff Src/stm32f0xx_hal_msp.o
+ .debug_line    0x0000000000003bd9      0x241 Src/stm32f0xx_it.o
+ .debug_line    0x0000000000003e1a      0x22e Src/system_stm32f0xx.o
+ .debug_line    0x0000000000004048      0x38b Src/tim.o
+ .debug_line    0x00000000000043d3       0x83 startup/startup_stm32f030x6.o
 
 .debug_str      0x0000000000000000     0x2b28
  .debug_str     0x0000000000000000      0x93d Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.o
