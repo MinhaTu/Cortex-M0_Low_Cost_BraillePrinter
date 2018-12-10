@@ -14,6 +14,7 @@ This project aims to build a functional Braille Printer that can help in the pro
 Este projeto visa construir uma impressora de Braille funcional que pode ajudar no processo de escrita e leitura nesse sistema. Resumidamente, nossa impressora trabalha com um mecanismo tipo CNC que se move nos eixos X, Y, nos quais há uma agulha acoplada a um motor DC que representa o eixo Z. Controlado pelo processador Cortex-M0 por meio de uma interface PS2, a agulha é responsável por fazer o Braille "escrevendo" os pontos.
 
 ### Material List:
+    -Microcontrolador Stm32F030F4P6;
     -Wooden base (50cm x 40cm);
     -Wooden base (31cm x 25cm);
     -3x DC motors (12V);
@@ -23,13 +24,14 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     -12x Nuts of 8 mm;
     -4x Aluminum structures;
     -6x Bearings;
-    -2x Aluminum frame (40cm x 0.4cm);
+    -2x Aluminum structures (40cm x 0.4cm);
     -20x Screws;
     -2x Gears;
     -2x Optical Encoder;
     -3x H Bridges;
     
 ### Lista de materiais
+    -Microcontrolador Stm32F030F4P6;
     -Base de madeira (50cm x 40cm);
     -Base de madeira (31cm x 25cm);
     -3x Motores DC (12V);
