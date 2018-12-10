@@ -2,7 +2,7 @@
 #include "tim.h"
 #include "gpio.h"
 
-void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t encoder_CE_pin, TIM_HandleTypeDef timer_left, TIM_HandleTypeDef timer_right, uint16_t channel_left, uint16_t channel_right){
+void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t encoder_CE_pin, GPIO_TypeDef* left_port, uint16_t left_pin, GPIO_TypeDef* right_port, uint16_t right_pin){
 	motor->dutyCycle = 0;
 
 	__HAL_TIM_SET_COUNTER(&htim3,28000);
@@ -16,19 +16,16 @@ void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t e
 
 	HAL_GPIO_WritePin(motor->encoder_CE_port, motor->encoder_CE_pin, GPIO_PIN_RESET);
 
-	motor->timer_left = timer_left;
-	motor->timer_right = timer_right;
+	motor->left_port = left_port;
+	motor->right_port =  right_port;
 
-	motor->channel_left = channel_left;
-	motor->channel_right = channel_right;
+	motor->left_pin = left_pin;
+	motor->right_pin = right_pin;
 
-	HAL_TIM_PWM_Start(&motor->timer_left, motor->channel_left);
-	HAL_TIM_PWM_Start(&motor->timer_right, motor->channel_right);
-
-	__HAL_TIM_SET_COMPARE(&motor->timer_left, motor->channel_left, 0);
-	__HAL_TIM_SET_COMPARE(&motor->timer_right, motor->channel_right, 0);
-
+	HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_RESET);
 }
+
 
 double myABS(double num1){
 	if(num1 < 0){
@@ -48,37 +45,37 @@ void updateAxis(MotorControl_t* motor,signed long setPoint){
 	motor->setPoint = setPoint;
 	__HAL_TIM_SET_COUNTER(&htim3,motor->actualPoint);
 
-	// Cálculo PWM - Quando está próximo do destino, diminui a velocidade do motor
-	motor->dutyCycle = myABS((double)(motor->setPoint - motor->actualPoint)) * (double)P_FRACTION;
-
-	if(motor->dutyCycle < MIN_DUTYCYCLE){
-		motor->dutyCycle = MIN_DUTYCYCLE;
-	}else if(motor->dutyCycle > MAX_DUTYCYCLE){
-		motor->dutyCycle = MAX_DUTYCYCLE;
-	}
+	//	// Cálculo PWM - Quando está próximo do destino, diminui a velocidade do motor
+	//	motor->dutyCycle = myABS((double)(motor->setPoint - motor->actualPoint)) * (double)P_FRACTION;
+	//
+	//	if(motor->dutyCycle < MIN_DUTYCYCLE){
+	//		motor->dutyCycle = MIN_DUTYCYCLE;
+	//	}else if(motor->dutyCycle > MAX_DUTYCYCLE){
+	//		motor->dutyCycle = MAX_DUTYCYCLE;
+	//	}
 
 	//Verificar se é necesseário adicionar um loop para uma margem de erro
 	while (myABS(motor->actualPoint - motor->setPoint) > 5 ){
 		if(motor->actualPoint > motor->setPoint){
 			// Ativa o motor para a esquerda até chegar na posição correta
 			while(motor->actualPoint > motor->setPoint){
-				__HAL_TIM_SET_COMPARE(&motor->timer_left, motor->channel_left, 255);
-				__HAL_TIM_SET_COMPARE(&motor->timer_right, motor->channel_right, 0);
+				HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_RESET);
 				motor->actualPoint = __HAL_TIM_GET_COUNTER(&htim3);
 			}
 
 		}else if(motor->actualPoint < motor->setPoint){
 			// Ativa o motor para a direita até chegar na posição correta
 			while(motor->actualPoint < motor->setPoint){
-				__HAL_TIM_SET_COMPARE(&motor->timer_left, motor->channel_left, 0);
-				__HAL_TIM_SET_COMPARE(&motor->timer_right, motor->channel_right, 255);
+				HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_SET);
 				motor->actualPoint = __HAL_TIM_GET_COUNTER(&htim3);
 			}
 		}
 
 		// Desliga o motor pras duas direções
-		__HAL_TIM_SET_COMPARE(&motor->timer_left, motor->channel_left, 0);
-		__HAL_TIM_SET_COMPARE(&motor->timer_right, motor->channel_right, 0);
+		HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_RESET);
 
 	}
 

@@ -31,11 +31,11 @@ typedef struct{
 	GPIO_TypeDef* encoder_CE_port;
 	uint16_t encoder_CE_pin;
 
-	TIM_HandleTypeDef timer_left;
-	TIM_HandleTypeDef timer_right;
+	GPIO_TypeDef* left_port;
+	GPIO_TypeDef* right_port;
 
-	uint16_t channel_left;
-	uint16_t channel_right;
+	uint16_t left_pin;
+	uint16_t right_pin;
 
 	uint8_t dutyCycle;
 }MotorControl_t;
@@ -48,7 +48,7 @@ typedef struct{
 	uint16_t B_PIN;
 }MotorControl_Simple_t;
 
-void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t encoder_CE_pin, TIM_HandleTypeDef timer_left, TIM_HandleTypeDef timer_right, uint16_t channel_left, uint16_t channel_right);
+void motorBegin(MotorControl_t* motor, GPIO_TypeDef* encoder_CE_port, uint16_t encoder_CE_pin, GPIO_TypeDef* left_port, uint16_t left_pin, GPIO_TypeDef* right_port, uint16_t right_pin);
 void updateAxis(MotorControl_t* motor,signed long setPoint);
 void motorBackward(MotorControl_Simple_t* motor, uint32_t time);
 void motorForward(MotorControl_Simple_t* motor, uint32_t time);
