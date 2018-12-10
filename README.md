@@ -13,9 +13,9 @@ This project aims to build a functional Braille Printer that can help in the pro
 ### Descrição
 Este projeto visa construir uma impressora de Braille funcional que pode ajudar no processo de escrita e leitura nesse sistema. Resumidamente, nossa impressora trabalha com um mecanismo tipo CNC que se move nos eixos X, Y, nos quais há uma agulha acoplada a um motor DC que representa o eixo Z. Controlado pelo processador Cortex-M0 por meio de uma interface PS2, a agulha é responsável por fazer o Braille "escrevendo" os pontos.
 
-### 1. Material List:
-    * Table of wood (50cm x 40cm);
-    - Table base (31cm x 25cm);
+### Material List:
+    -Table of wood (50cm x 40cm);
+    -Table base (31cm x 25cm);
     -3x DC motors (12V);
     -Structure similar to a CNC for the X, Y axes;
     -Headless bore of 53cm wide and 8mm in diameter;
@@ -25,7 +25,9 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     -6x Bearings;
     -2x Aluminum frame (40cm x 0.4cm);
     -20x Screws;
-    -2x Gears
+    -2x Gears;
+    -2x Optical Encoder;
+    -3x H Bridges;
     
 ### Lista de materiais
     -Base de madeira (50cm x 40cm);
@@ -40,6 +42,8 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     -2x Estrutura de alumínio (40cm x 0,4cm);
     -20x Parafusos;
     -2x Engrenagens;
+    -2x Encoder ópticos;
+    -3x Pontes H;
 
 ## Mounting
 ### Structure of the Y Axis:
@@ -70,6 +74,18 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     Acoplamos um tipo de agulha de tricô a um motor DC e lixamos a sua ponta para que o grau de perfuração seja reduzido e tenhamos pontos mais próximos da escrita real de Braille.
     
 ## How does it work?
+    The device operates by an input via the PS2 keyboard, which is stored in a buffer within the cortex-M0. In this, what was passed by the keyboard goes through an algorithm to count the number of characters that could be printed per line at the time of transcribing for braille. The algorithm inverts the phrase and uses an array that contains the braille letters to be able to print line by line, being coordinated by the code and calibrated via an encoder.
 
 ## Como funciona?
-    
+    O funcionamento do dispositivo se dá a partir de uma entrada, via teclado PS2, que é armazenada num buffer dentro do cortex-M0. Nisso, o que foi passado pelo teclado passa por um algoritmo para contar o número que caracteres que poderam ser imprimidos por linha na hora de transcrever para braille. O algoritmo inverte a frase e utiliza de uma matriz que contém as letras em braille para poder imprimir linha a linha, sendo coordenado pelo código e calibrado via encoder.
+
+## Limitations
+    -The printer works by printing line to line, so it is not possible to pass a full text uninterruptedly via the PS2 keyboard and it is necessary to pass line by line so that the printer can print correctly.
+    -The lack of an appropriate voltage source can disturb the operation, because the motors require voltage close to 12V to operate well, given the weight of the structure and all frictions.
+    -The structure is relatively fragile, as accidents can decalibrate the structure and this takes a while to be adjusted.
+
+
+## Limitações
+    -A impressora funciona imprimindo linha à linha, logo não é possível passar um texto completo ininterruptamente via teclado PS2 e é necessário passar linha por linha para que a impressora possa imprimir corretamente.
+    -A falta de uma fonte de tensão apropriada pode atrapalhar o funcionamento, pois os motores exigem tensão próxima de 12V para operar bem, dado o peso da estrutura e todos os atritos.
+    -A estrutura é relativamente frágil, pois acidentes podem descalibrar a estrutura e isso toma um tempo para ser ajustado.
