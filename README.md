@@ -51,5 +51,8 @@ Este projeto visa construir uma impressora de Braille funcional que pode ajudar 
     Desse modo, obtivemos uma base móvel com um parafuso central.
     5. Os rolamentos colocados na parte externa devem se encaixar perfeitamente na parte exterior das duas estruturas de alumínio (40cm x 0,4cm) fixadas na base.
     6. Criamos uma estrutura de fixação e rotação a partir da associação do motor DC com engrenagens e da criação de uma base para fixar o motor.
-    
+## Estrutura do Eixo X:
+    Basicamente, posicionamos o CNC que foi extraído de uma impressora antiga que desmontamos.
+## Estrutura do Eixo Z:
+    Acoplamos um tipo de agulha de tricô a um motor DC e lixamos a sua ponta para que o grau de perfuração seja reduzido e tenhamos pontos mais próximos da escrita real de Braille.
     
