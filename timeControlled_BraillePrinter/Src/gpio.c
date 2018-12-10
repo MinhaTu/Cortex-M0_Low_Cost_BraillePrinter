@@ -92,12 +92,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(DATA___Keyboard_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin */
-  GPIO_InitStruct.Pin = SENSOR_2_A_Pin|SENSOR_2___B_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin 
                            PAPin PAPin */
   GPIO_InitStruct.Pin = MOTOR___X___A_Pin|LED_Pin|MOTOR___X___B_Pin|MOTOR___Y___A_Pin 

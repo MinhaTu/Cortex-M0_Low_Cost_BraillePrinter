@@ -58,10 +58,6 @@
 #define CLK__Keyboard_EXTI_IRQn EXTI0_1_IRQn
 #define DATA___Keyboard_Pin GPIO_PIN_1
 #define DATA___Keyboard_GPIO_Port GPIOA
-#define SENSOR_2_A_Pin GPIO_PIN_2
-#define SENSOR_2_A_GPIO_Port GPIOA
-#define SENSOR_2___B_Pin GPIO_PIN_3
-#define SENSOR_2___B_GPIO_Port GPIOA
 #define MOTOR___X___A_Pin GPIO_PIN_4
 #define MOTOR___X___A_GPIO_Port GPIOA
 #define LED_Pin GPIO_PIN_5

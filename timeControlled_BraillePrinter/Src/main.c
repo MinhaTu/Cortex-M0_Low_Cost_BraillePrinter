@@ -40,6 +40,7 @@
 #include "main.h"
 #include "stm32f0xx_hal.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
@@ -148,6 +149,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM14_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
 //	motorBegin(&motorX, ENCODER_1_A_PORT, ENCODER_1_A_PIN, ENCODER_1_B_PORT, ENCODER_1_B_PIN, htim14, htim3, TIM_CHANNEL_1,  TIM_CHANNEL_1);
@@ -171,12 +173,14 @@ int main(void)
   /* USER CODE BEGIN 3 */
 
 		/* Faz a leitura do teclado e envia ao buffer_char */
+
 		while(1){
 			if(keyboardAvailable(&keyboard)){
 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 				HAL_Delay(50);
 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 				uint8_t c = keyboardRead(&keyboard);
+				HAL_UART_Transmit(&huart1, (uint8_t *)&c, 1, 1000);
 				if(c == PS2_ENTER){
 					pressedEnter = 1;
 					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
@@ -186,7 +190,7 @@ int main(void)
 				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
 		}
-
+		HAL_UART_Transmit(&huart1, "Enter apertado\n\r", 16, 1000);
 		/* Programa leitura do teclado */
 		if(pressedEnter){
 			reverse(buffer_char);
@@ -275,6 +279,7 @@ void SystemClock_Config(void)
 
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_PeriphCLKInitTypeDef PeriphClkInit;
 
     /**Initializes the CPU, AHB and APB busses clocks 
     */
@@ -296,6 +301,13 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
+  PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK1;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
