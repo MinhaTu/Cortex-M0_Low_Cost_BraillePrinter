@@ -190,7 +190,7 @@ int main(void)
 				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
 		}
-		HAL_UART_Transmit(&huart1, "Enter apertado\n\r", 16, 1000);
+		HAL_UART_Transmit(&huart1, "\n\rEnter apertado\n\r", 19, 1000);
 		/* Programa leitura do teclado */
 		if(pressedEnter){
 			reverse(buffer_char);

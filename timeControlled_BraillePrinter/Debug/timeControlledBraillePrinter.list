@@ -6659,12 +6659,12 @@ int main(void)
 				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
 		}
-		HAL_UART_Transmit(&huart1, "Enter apertado\n\r", 16, 1000);
+		HAL_UART_Transmit(&huart1, "\n\rEnter apertado\n\r", 19, 1000);
  800263c:	23fa      	movs	r3, #250	; 0xfa
  800263e:	009b      	lsls	r3, r3, #2
  8002640:	496f      	ldr	r1, [pc, #444]	; (8002800 <main+0x2ac>)
  8002642:	486d      	ldr	r0, [pc, #436]	; (80027f8 <main+0x2a4>)
- 8002644:	2210      	movs	r2, #16
+ 8002644:	2213      	movs	r2, #19
  8002646:	f7fe ff47 	bl	80014d8 <HAL_UART_Transmit>
 		/* Programa leitura do teclado */
 		if(pressedEnter){
