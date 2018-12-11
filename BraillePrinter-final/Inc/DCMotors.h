@@ -21,6 +21,8 @@
 #define MIN_DUTYCYCLE 		175   //0 - 255 (125)
 #define MAX_DUTYCYCLE 		255  //0 - 255 (255)
 
+#define NEXT_LINE			220
+#define	NEXT_CHAR			270
 #define PIERCE_TIME			100
 
 typedef struct{
@@ -54,6 +56,7 @@ void motorBackward(MotorControl_Simple_t* motor, uint32_t time);
 void motorForward(MotorControl_Simple_t* motor, uint32_t time);
 void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin);
 void pierce(MotorControl_Simple_t* motor, uint32_t time);
+void updateAxis_Simple(MotorControl_t* motor, uint32_t time);
 double myABS(double num1);
 
 #endif /* DCMOTORS_H_ */

@@ -52,7 +52,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-#define MAX_CARACTERES 30
+#define MAX_CARACTERES 3
 #define MAX_LINHAS 27
 #define POS_INI 28000
 #define POS_FIM 4000
@@ -124,7 +124,7 @@ int main(void)
 	motorSimpleBegin(&motorZ, Motor_Z_A_GPIO_Port, Motor_Z_A_Pin, Motor_Z_B_GPIO_Port, Motor_Z_B_Pin);
 
 	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
-	memset(buffer_char, 'p', sizeof(buffer_char));
+	memset(buffer_char, 'o', sizeof(buffer_char));
 	buffer_char[MAX_CARACTERES - 1] = 0;
 
   /* USER CODE END 2 */
@@ -154,7 +154,6 @@ int main(void)
 		// Depois são ajustes para melhorar os espaçamentos
 		// Verificar cuidadosamente se no eixo y não ta acontecendo overflow, o que eu acho que vai acontecer.
 
-		updateAxis(&motorY, motorY.setPoint + 120);
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -174,75 +173,92 @@ int main(void)
 				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
 		}*/
-//		pressedEnter = 1;
-//		/* Programa leitura do teclado */
-//		if(pressedEnter){
-//			for(int j=0;j<3;j++){
-//				//Imprime as linhas em braille
-//				if(j==1){
-//					//Linhas das matrizes
-//					for(int8_t i=strlen((const char*)buffer_char)-1; i>=0; --i){
-//
-//						// Recebe os pontos da linha para o caractere atual
-//						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
-//
-//						// Percorre os 4 bits, no máximo, para cada caractere
-//						for(int8_t x = 2; x >=0; --x){
-//
-//							// Passa para a próxima iteração se não tem ponto para furar
-//							if(buffer_braille[x] == '1'){
-//								pierce(&motorZ, PIERCE_TIME);
-//							}
-//
-//							// Incrementa posição do eixo x, espaçamento entre colunas
-//							updateAxis(&motorX, motorX.setPoint - DELTA_COL_LIN);
-//						}
-//
-//						// Incrementa posição do eixo x, espaçamento entre char na horizontal
-//						updateAxis(&motorX, motorX.setPoint - DELTA_CHAR_H + DELTA_COL_LIN);
-//
-//					}
-//
-//					// Decrementa posição do eixo y, espaçamento entre linhas
-//					//updateAxis(&motorY, motorY.setPoint - DELTA_COL_LIN);
-//				}else{
-//
-//					//Linhas das matrizes
-//					for(int8_t i=0; i<strlen((const char*)buffer_char); i++){
-//
-//						//Recebe os pontos da linha para o caractere atual
-//						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
-//
-//						//Percorre os 4 bits, no máximo, para cada caractere
-//						for(int8_t x = 0; x < 2; ++x){
-//
-//							if(buffer_braille[x] == '1'){
-//								pierce(&motorZ, PIERCE_TIME);
-//							}
-//
-//							// Incrementa posição do eixo x, espaçamento entre colunas
-//							updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
-//						}
-//
-//						// Incrementa posição do eixo x, espaçamento entre char na horizontal
-//						updateAxis(&motorX, motorX.setPoint + DELTA_CHAR_H - DELTA_COL_LIN);
-//
-//					}
-//
-//					// Incrementa posição do eixo y, espaçamento entre linhas
-//					updateAxis(&motorY, motorY.setPoint + DELTA_COL_LIN);
-//				}
-//			}
-//
-//			// Incrementa posição do eixo y, espaçamento entre char na vertical
-//			//updateAxis(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
-//
-//			// Seta posição eixo x para inicial
-//			updateAxis(&motorX, POS_INI);
-//
-//			pressedEnter = 0;
-//		}
-//		clearBuffer(buffer_char);
+		pressedEnter = 1;
+		/* Programa leitura do teclado */
+		if(pressedEnter){
+			//reverse(buffer_char);
+			uint32_t length = strlen((const char*)buffer_char);
+			for(int j=0;j<3;j++){
+				//Imprime as linhas em braille
+				if(j==1){
+					//Linhas das matrizes
+					for(int8_t i=length-1; i>=0; --i){
+
+						// Recebe os pontos da linha para o caractere atual
+						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
+
+						// Percorre os 4 bits, no máximo, para cada caractere
+						for(int8_t x = 0; x < 2; ++x){
+
+							// Passa para a próxima iteração se não tem ponto para furar
+							if(buffer_braille[x] == '1'){
+								pierce(&motorZ, PIERCE_TIME);
+							}
+
+							if(x != 1){
+								updateAxis(&motorX, motorX.setPoint - DELTA_COL_LIN);
+							}
+
+							// Incrementa posição do eixo x, espaçamento entre colunas
+
+						}
+
+						// Incrementa posição do eixo x, espaçamento entre char na horizontal
+						if(i != 0){
+							updateAxis(&motorX, motorX.setPoint - DELTA_CHAR_H);
+						}
+
+
+					}
+
+					// Decrementa posição do eixo y, espaçamento entre linhas
+					//updateAxis(&motorY, motorY.setPoint - DELTA_COL_LIN);
+					updateAxis_Simple(&motorY, NEXT_LINE);
+				}else{
+
+					//Linhas das matrizes
+					for(int8_t i=0; i<length; i++){
+
+						//Recebe os pontos da linha para o caractere atual
+						fillLineWithBraille(buffer_braille, j,buffer_char[i]);
+
+						//Percorre os 4 bits, no máximo, para cada caractere
+						for(int8_t x = 1; x >= 0; --x){
+
+							if(buffer_braille[x] == '1'){
+								pierce(&motorZ, PIERCE_TIME);
+							}
+
+							// Incrementa posição do eixo x, espaçamento entre colunas
+							if(x != 0){
+								updateAxis(&motorX, motorX.setPoint + DELTA_COL_LIN);
+							}
+
+
+						}
+
+						// Incrementa posição do eixo x, espaçamento entre char na horizontal
+						if(i != (length -1)){
+							updateAxis(&motorX, motorX.setPoint + DELTA_CHAR_H);
+						}
+
+
+					}
+
+					// Incrementa posição do eixo y, espaçamento entre linhas
+					updateAxis_Simple(&motorY, NEXT_LINE);
+				}
+			}
+
+			// Incrementa posição do eixo y, espaçamento entre char na vertical
+			//updateAxis(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
+			updateAxis_Simple(&motorY, NEXT_CHAR);
+			// Seta posição eixo x para inicial
+			updateAxis(&motorX, POS_INI);
+
+			pressedEnter = 0;
+		}
+		clearBuffer(buffer_char);
 
 	}
   /* USER CODE END 3 */

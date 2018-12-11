@@ -89,6 +89,13 @@ void updateAxis(MotorControl_t* motor,signed long setPoint){
 
 }
 
+void updateAxis_Simple(MotorControl_t* motor, uint32_t time){
+	HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_RESET);
+	HAL_Delay(time);
+	HAL_GPIO_WritePin(motor->left_port, motor->left_pin, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(motor->right_port, motor->right_pin, GPIO_PIN_RESET);
+}
 void motorSimpleBegin(MotorControl_Simple_t* motor, GPIO_TypeDef* a_port, uint16_t a_pin, GPIO_TypeDef* b_port, uint16_t b_pin){
 	motor->A_PORT = a_port;
 	motor->A_PIN = a_pin;
