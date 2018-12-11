@@ -52,7 +52,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-#define MAX_CARACTERES 3
+#define MAX_CARACTERES 30
 #define MAX_LINHAS 27
 #define POS_INI 28000
 #define POS_FIM 4000
@@ -124,8 +124,8 @@ int main(void)
 	motorSimpleBegin(&motorZ, Motor_Z_A_GPIO_Port, Motor_Z_A_Pin, Motor_Z_B_GPIO_Port, Motor_Z_B_Pin);
 
 	keyboardBegin(&keyboard, PS2_DATA_PORT, PS2_DATA_PIN, PS2_IQR_PORT, PS2_IQR_PIN);
-	memset(buffer_char, 'o', sizeof(buffer_char));
-	buffer_char[MAX_CARACTERES - 1] = 0;
+//	memset(buffer_char, 'o', sizeof(buffer_char));
+//	buffer_char[MAX_CARACTERES - 1] = 0;
 
   /* USER CODE END 2 */
 
@@ -158,7 +158,7 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 		/* Faz a leitura do teclado e envia ao buffer_char */
-		/*while(1){
+		while(1){
 			if(keyboardAvailable(&keyboard)){
 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 				HAL_Delay(50);
@@ -168,12 +168,17 @@ int main(void)
 					pressedEnter = 1;
 					HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 					break;
+				}else if(c == PS2_DOWNARROW){
+					updateAxis_Simple(&motorY, 50, DOWN);
+				}else if(c == PS2_UPARROW){
+					updateAxis_Simple(&motorY, 50, UP);
+				}else if(c == PS2_BACKSPACE){
+					clearBuffer(buffer_char);
+				}else{
+					feedBuffer(buffer_char, MAX_CARACTERES, c);
 				}
-
-				feedBuffer(buffer_char, MAX_CARACTERES, c);
 			}
-		}*/
-		pressedEnter = 1;
+		}
 		/* Programa leitura do teclado */
 		if(pressedEnter){
 			//reverse(buffer_char);
@@ -213,7 +218,7 @@ int main(void)
 
 					// Decrementa posição do eixo y, espaçamento entre linhas
 					//updateAxis(&motorY, motorY.setPoint - DELTA_COL_LIN);
-					updateAxis_Simple(&motorY, NEXT_LINE);
+					updateAxis_Simple(&motorY, NEXT_LINE, UP);
 				}else{
 
 					//Linhas das matrizes
@@ -246,18 +251,19 @@ int main(void)
 					}
 
 					// Incrementa posição do eixo y, espaçamento entre linhas
-					updateAxis_Simple(&motorY, NEXT_LINE);
+					updateAxis_Simple(&motorY, NEXT_LINE, UP);
 				}
 			}
 
 			// Incrementa posição do eixo y, espaçamento entre char na vertical
 			//updateAxis(&motorY, motorY.setPoint + DELTA_CHAR_V - DELTA_COL_LIN);
-			updateAxis_Simple(&motorY, NEXT_CHAR);
+			updateAxis_Simple(&motorY, NEXT_CHAR, UP);
 			// Seta posição eixo x para inicial
 			updateAxis(&motorX, POS_INI);
 
 			pressedEnter = 0;
 		}
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		clearBuffer(buffer_char);
 
 	}
