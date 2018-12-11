@@ -55,7 +55,7 @@ void updateAxis(MotorControl_t* motor,signed long setPoint){
 	//	}
 
 	//Verificar se é necesseário adicionar um loop para uma margem de erro
-	while (myABS(motor->actualPoint - motor->setPoint) > 5 ){
+	while (myABS(motor->actualPoint - motor->setPoint) > 5){
 		if(motor->actualPoint > motor->setPoint){
 			// Ativa o motor para a esquerda até chegar na posição correta
 			while(motor->actualPoint > motor->setPoint){

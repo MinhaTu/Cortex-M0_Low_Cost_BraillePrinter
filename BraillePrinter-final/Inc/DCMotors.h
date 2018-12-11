@@ -21,8 +21,8 @@
 #define MIN_DUTYCYCLE 		175   //0 - 255 (125)
 #define MAX_DUTYCYCLE 		255  //0 - 255 (255)
 
-#define NEXT_LINE			250
-#define	NEXT_CHAR			320
+#define NEXT_LINE			400
+#define	NEXT_CHAR			740
 #define PIERCE_TIME			100
 
 #define UP					1

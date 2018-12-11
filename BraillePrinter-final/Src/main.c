@@ -175,8 +175,12 @@ int main(void)
 				}else if(c == PS2_BACKSPACE){
 					clearBuffer(buffer_char);
 				}else{
+
+
+
 					feedBuffer(buffer_char, MAX_CARACTERES, c);
 				}
+				keyboardClear(&keyboard);
 			}
 		}
 		/* Programa leitura do teclado */
@@ -264,6 +268,7 @@ int main(void)
 			pressedEnter = 0;
 		}
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		keyboardClear(&keyboard);
 		clearBuffer(buffer_char);
 
 	}
