@@ -133,6 +133,27 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
+
+		// ATENÇÂO
+		// 1. Verificar se as conexões estão certas
+		// 2. Vericiar se o encoder tá ligando na greenpill
+		// 3. Entender para que lado rodar o motor para incrementar o contador no timer
+		// 4. Entender para que lado rodar o motor para decrementar o contador no timer
+		// 5. Se voltar a funcionar, descobrir DELTA_CHAR_V
+		// 6. Separar DELTA_COL_LIN em DELTA_COL e DELTA_LIN, DELTA_COL é o atual DELTA_COL_LIN
+		// 7. Descobrir DELTA_LIN
+		// 8. Se quiser que o motor desça e ele ta subindo com -> updateAxis(&motorY, motorY.setPoint - DELTA_COL_LIN); Altera o sinal e vice-versa
+		// 9. Descobrir quantos caracteres cabem na linha, determinando o numero máximo de linhas.
+		// 10. Testar se tudo funciona junto
+		// 11. FIM
+		// Pode se basear a quantidade de fitas necessárias para encontrar DELTA_CHAR_V, DELTA_LIN, incrementando um valor fixo até chegar no fim da folha
+		// Verificar o tanto em centímetros percorridos e fazer regra de três.
+		// No eixo x, temos 25,5 cm para usar para imprimir. Fiz incrementos de 100 em 100 e obtive 30 incremento de 100, então
+		//  25,5 cm ------ 30 * 100 fitas
+		//    x cm  ------    x fitas necessárias, onde x é a distância que se deseja obter
+		// Depois são ajustes para melhorar os espaçamentos
+		// Verificar cuidadosamente se no eixo y não ta acontecendo overflow, o que eu acho que vai acontecer.
+
 		updateAxis(&motorY, motorY.setPoint + 120);
   /* USER CODE END WHILE */
 
