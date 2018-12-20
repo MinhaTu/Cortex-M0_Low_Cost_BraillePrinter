@@ -7,6 +7,7 @@
     @studart301d    Gabriel Studart 
     @RussellFox     Ítalo Aguiar
 ### Check the prototype in the link below
+https://www.youtube.com/watch?v=vpWazr3z5D8
 ### Description
 This project aims to build a functional Braille Printer that can help in the process of writting and reading in that system. Briefly speaking, our printer works with a CNC-like mechanism that moves in the axes X,Y in which there is a needle coupled to a DC motor. Controlled by the Cortex-M0 processor by means of an PS2 Interface, the needle is reponsible for making the Braille writting itself, the dots.    
 
